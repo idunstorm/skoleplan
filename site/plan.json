@@ -1,0 +1,388 @@
+{
+  "klasse": "9C",
+  "elev": "Samson",
+  "valgfag": "Fransk",
+  "aar": 2026,
+  "uker": [
+    25,
+    26
+  ],
+  "oppdatert": "2026-07-14",
+  "doc9c": "https://docs.google.com/document/d/e/2PACX-1vT1Uweya7sdSKaoIRlhltQkJkE0RyiPI3VAIwPSS_v7TEo-cRcaPTwzkmOwuUeu_0Td6km2KH-_iwM2/pub",
+  "kilde9c": "https://www.bergen.kommune.no/omkommunen/avdelinger/ytrebygda-skole/arbeidsplaner",
+  "arshjul": "https://docs.google.com/spreadsheets/d/1ktXyyf_pH3D-Z_2NwcQ9eyByFhLK_zuzOx6zgLX307k/edit?gid=0#gid=0",
+  "kilder": [
+    {
+      "klasse": "9C",
+      "fra": "2026-06-01",
+      "doc": "https://docs.google.com/document/d/e/2PACX-1vT1Uweya7sdSKaoIRlhltQkJkE0RyiPI3VAIwPSS_v7TEo-cRcaPTwzkmOwuUeu_0Td6km2KH-_iwM2/pub"
+    },
+    {
+      "klasse": "10A",
+      "fra": "2026-08-11",
+      "doc": "https://docs.google.com/document/d/e/2PACX-1vTYhpFV8CFjnH80_qUE__glc_tB6niOE6I7pD2In1nOez5zk5doG3Dlumcz1qmiCALtxRJIND7BUL1B/pub"
+    }
+  ],
+  "ukelekse": {
+    "25": "Bruk 15–30 minutter hjemme på å gå gjennom det de har lært på skolen, sammen med en voksen.",
+    "26": ""
+  },
+  "temaer": [
+    {
+      "fag": "KRLE",
+      "tema": "Etikk",
+      "blurb": "Filosofihistoriens ideer om rett og galt, brukt til å diskutere dagsaktuelle spørsmål – og øving på å være uenig på en god måte.",
+      "laerer": [
+        "Hvordan kjente filosofer har tenkt om rett og galt – bl.a. dydsetikk (bli et godt menneske), pliktetikk (følge gode regler) og konsekvensetikk (se på følgene)",
+        "Å bruke disse tankemåtene til å diskutere dagsaktuelle etiske spørsmål",
+        "Å håndtere uenighet og se en sak fra flere sider",
+        "Å reflektere over de store spørsmålene ved å vokse opp i et mangfoldig samfunn"
+      ],
+      "laereplan": {
+        "label": "Se i læreplanen (udir)",
+        "url": "https://www.udir.no/lk20/rle01-03/kompetansemaal-og-vurdering/kv178"
+      },
+      "ressurs": {
+        "label": "Dydsetikk, pliktetikk og konsekvensetikk (NDLA)",
+        "url": "https://ndla.no/nb/r/religion-og-etikk/konsekvensetikk-pliktetikk-og-dydsetikk/ff79e905a3"
+      },
+      "sporsmal": [
+        "Er en handling god hvis den fører til noe bra (konsekvens), eller hvis den følger en god regel (plikt)? Hva veier tyngst for deg?",
+        "Finnes det handlinger som alltid er gale, uansett konsekvensene?",
+        "Kan to personer være uenige om noe moralsk uten at én av dem «tar feil»?"
+      ]
+    },
+    {
+      "fag": "Samfunnsfag",
+      "tema": "Kampen om Afrika",
+      "blurb": "Hvordan europeiske stormakter erobret nesten hele Afrika mellom 1870 og 1914, hvilke følger det fikk, og hva som henger igjen i dag.",
+      "laerer": [
+        "Hvorfor europeiske land erobret nesten hele Afrika mellom 1870 og 1914 (jakt på råvarer og markeder, nasjonalisme, rivalisering – og datidens «siviliseringstanke»)",
+        "Hvilke følger koloniseringen fikk for ulike land i Afrika",
+        "Hvordan dette henger sammen med verden slik den er i dag",
+        "Om holdninger fra kolonitiden fremdeles finnes"
+      ],
+      "laereplan": {
+        "label": "Se i læreplanen (udir)",
+        "url": "https://www.udir.no/lk20/saf01-04/kompetansemaal-og-vurdering/kv147"
+      },
+      "ressurs": {
+        "label": "Imperialismens tidsalder (NDLA)",
+        "url": "https://ndla.no/nb/r/historie-pb/imperialismens-tidsalder/aadbcfeb92"
+      },
+      "sporsmal": [
+        "Hvorfor tror du så mange land ville erobre Afrika på så kort tid?",
+        "Ser vi fortsatt spor av kolonitiden i dag – i landegrenser, språk eller økonomi?",
+        "Datidens europeere snakket om «den hvite manns byrde». Hva forteller det oss om hvordan de så på andre folk?"
+      ]
+    },
+    {
+      "fag": "Engelsk",
+      "tema": "Out of This World (Fantasy & Sci-Fi)",
+      "blurb": "Fantasy og science fiction: hva som kjennetegner sjangrene, hvordan de skiller seg fra hverandre, og sammenligning av bøker og film.",
+      "laerer": [
+        "Hva som kjennetegner fantasy og science fiction",
+        "Forskjeller og likheter mellom sjangrene – i bøker og film",
+        "Å snakke, lese og lytte på engelsk om temaet",
+        "Vurdering: skrive en tekst eller lage en podkast (dato: sjekk Vigilo/Classroom)"
+      ],
+      "laereplan": {
+        "label": "Se i læreplanen (udir)",
+        "url": "https://www.udir.no/lk20/eng01-05/kompetansemaal-og-vurdering/kv903"
+      },
+      "ressurs": null,
+      "sporsmal": [
+        "Hva skiller science fiction fra fantasy – og hvorfor blandes de ofte?",
+        "Hvilken film eller bok i disse sjangrene har gjort mest inntrykk på deg, og hvorfor?",
+        "Sci-fi handler ofte om fremtiden – hvilken teknologi fra en film tror du kan bli virkelig?"
+      ]
+    },
+    {
+      "fag": "Matematikk",
+      "tema": "Oppsummering",
+      "blurb": "Repetisjon av årets temaer før sommeren.",
+      "laerer": [
+        "Repetisjon av årets temaer: tall og algebra, funksjoner, geometri, statistikk og sannsynlighet"
+      ],
+      "laereplan": {
+        "label": "Se i læreplanen (udir)",
+        "url": "https://www.udir.no/lk20/mat01-05/kompetansemaal-og-vurdering/kv14"
+      },
+      "ressurs": null,
+      "sporsmal": [
+        "Hvilket matematikktema satt best i år – og hvilket var vanskeligst?"
+      ]
+    },
+    {
+      "fag": "Naturfag",
+      "tema": "Oppsummering (naturfag)",
+      "blurb": "Repetisjon av årets temaer, blant annet nerve- og hormonsystemet.",
+      "laerer": [
+        "Repetisjon av årets temaer, bl.a. nerve- og hormonsystemet og hvordan signalsystemene i kroppen påvirkes"
+      ],
+      "laereplan": {
+        "label": "Se i læreplanen (udir)",
+        "url": "https://www.udir.no/lk20/nat01-04/kompetansemaal-og-vurdering/kv78"
+      },
+      "ressurs": null,
+      "sporsmal": [
+        "Hva var det mest overraskende du lærte i naturfag i år?"
+      ]
+    },
+    {
+      "fag": "Kroppsøving",
+      "tema": "Skolerunden",
+      "blurb": "Uteøkt og løping. Husk gymtøy på kroppsøvingsdagene.",
+      "laerer": [
+        "Uteøkt og skolerunden (løping/aktivitet ute)"
+      ],
+      "laereplan": null,
+      "ressurs": null,
+      "sporsmal": []
+    },
+    {
+      "fag": "Musikk",
+      "tema": "Musikk og samfunn",
+      "blurb": "Hvordan musikk henger sammen med og påvirker samfunnet.",
+      "laerer": [
+        "Hvordan musikk speiler og påvirker samfunnet"
+      ],
+      "laereplan": null,
+      "ressurs": null,
+      "sporsmal": [
+        "Finnes det en sang som har betydd noe for en hel generasjon? Hvilken, og hvorfor?"
+      ]
+    }
+  ],
+  "vurderinger": [
+    {
+      "fag": "Engelsk",
+      "tittel": "Vurdering: skriving/podkast – Out of This World",
+      "dato": null,
+      "note": "Dato ikke oppgitt i planen – sjekk Vigilo/Google Classroom."
+    }
+  ],
+  "dager": [
+    {
+      "uke": 25,
+      "dow": 1,
+      "timer": [
+        {
+          "t": "08:30–10:40",
+          "f": "KRLE"
+        },
+        {
+          "t": "11:30–12:30",
+          "f": "Fransk (valgfag)"
+        },
+        {
+          "t": "12:40–13:40",
+          "f": "Norsk"
+        },
+        {
+          "t": "13:50–14:50",
+          "f": "Naturfag"
+        }
+      ],
+      "lekser": [],
+      "husk": [],
+      "hendelser": []
+    },
+    {
+      "uke": 25,
+      "dow": 2,
+      "timer": [
+        {
+          "t": "08:30–09:30",
+          "f": "Engelsk"
+        },
+        {
+          "t": "09:40–10:40",
+          "f": "Matematikk",
+          "nb": "Rydde klasserommet / levere Chromebook"
+        },
+        {
+          "t": "11:30–12:30",
+          "f": "Kroppsøving",
+          "nb": "Skolerunden"
+        },
+        {
+          "t": "12:40–13:40",
+          "f": "Norsk"
+        }
+      ],
+      "lekser": [
+        {
+          "fag": "Matematikk",
+          "tekst": "Matematikkgruppe med Sondre og Ranveig"
+        }
+      ],
+      "husk": [
+        {
+          "tekst": "Husk gymtøy (kroppsøving – skolerunden)"
+        },
+        {
+          "tekst": "Ta med ALT skoleutstyr som er lånt av skolen – skal leveres i dag"
+        }
+      ],
+      "hendelser": []
+    },
+    {
+      "uke": 25,
+      "dow": 3,
+      "spesial": true,
+      "timer": [],
+      "lekser": [],
+      "husk": [
+        {
+          "tekst": "Klær etter været (Bergen) + evt. matpakke/drikke"
+        }
+      ],
+      "hendelser": [
+        {
+          "tittel": "Byvandring",
+          "sted": "Oppmøte ved Den blå steinen kl. 11",
+          "slutt": "Ferdig ved Den blå steinen kl. 13",
+          "start": "11:00",
+          "end": "13:00"
+        }
+      ]
+    },
+    {
+      "uke": 25,
+      "dow": 4,
+      "spesial": true,
+      "timer": [],
+      "lekser": [],
+      "husk": [
+        {
+          "tekst": "Gode tursko, klær etter vær, matpakke og drikke – evt. regntøy"
+        }
+      ],
+      "hendelser": [
+        {
+          "tittel": "Trefjellstur (Fløien–Rundemannen–Blåmannen)",
+          "sted": "Oppmøte Fløibanestasjonen kl. 10",
+          "slutt": "Tilpasses været",
+          "start": "10:00",
+          "end": "14:00"
+        }
+      ]
+    },
+    {
+      "uke": 25,
+      "dow": 5,
+      "spesial": true,
+      "timer": [],
+      "lekser": [],
+      "husk": [
+        {
+          "tekst": "Klær etter været + evt. matpakke/drikke"
+        }
+      ],
+      "hendelser": [
+        {
+          "tittel": "Bergenhus festningsmuseum",
+          "sted": "Oppmøte ved Den blå steinen kl. 10.30",
+          "slutt": "Ferdig i byen ca. kl. 13",
+          "start": "10:30",
+          "end": "13:00"
+        }
+      ]
+    },
+    {
+      "uke": 26,
+      "dow": 1,
+      "spesial": true,
+      "timer": [],
+      "lekser": [],
+      "husk": [
+        {
+          "tekst": "Fjæreklær + sko som tåler vann, klær etter vær, matpakke/drikke"
+        }
+      ],
+      "hendelser": [
+        {
+          "tittel": "Livet i fjæren",
+          "sted": "Oppmøte parkeringsplassen ved Arboretet kl. 10 → Sandholna",
+          "slutt": "Avslutter ca. kl. 13 på parkeringsplassen",
+          "start": "10:00",
+          "end": "13:00"
+        }
+      ]
+    },
+    {
+      "uke": 26,
+      "dow": 2,
+      "spesial": true,
+      "timer": [],
+      "lekser": [
+        {
+          "fag": "Matematikk",
+          "tekst": "Til tirsdag"
+        }
+      ],
+      "husk": [],
+      "hendelser": [
+        {
+          "tittel": "Aktivitetsdag på skolen",
+          "sted": "Oppmøte kl. 11.50",
+          "slutt": "Ferdig til vanlig tid",
+          "start": "11:50",
+          "end": "14:00"
+        }
+      ]
+    },
+    {
+      "uke": 26,
+      "dow": 3,
+      "spesial": true,
+      "timer": [],
+      "lekser": [],
+      "husk": [],
+      "hendelser": [
+        {
+          "tittel": "Frokost og avslutning for året",
+          "sted": "Oppmøte 8.30 i klasserommet",
+          "slutt": "Ferdig kl. 10.40 – siste skoledag før ferien",
+          "start": "08:30",
+          "end": "10:40"
+        }
+      ]
+    },
+    {
+      "uke": 26,
+      "dow": 4,
+      "spesial": true,
+      "ferie": true,
+      "timer": [],
+      "lekser": [],
+      "husk": [],
+      "hendelser": [
+        {
+          "tittel": "FERIE 🎉",
+          "sted": "Sommerferie starter",
+          "start": null
+        }
+      ]
+    },
+    {
+      "uke": 26,
+      "dow": 5,
+      "spesial": true,
+      "ferie": true,
+      "timer": [],
+      "lekser": [],
+      "husk": [],
+      "hendelser": []
+    }
+  ],
+  "beskjeder": [
+    {
+      "dato": "2026-09-03",
+      "type": "info",
+      "tittel": "Foreldremøte 10A",
+      "tekst": "Kl. 18:00 på skolen (eksempel – slett meg)"
+    }
+  ]
+}

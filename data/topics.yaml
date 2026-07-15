@@ -1,0 +1,83 @@
+# ============================================================
+# TOPICS – kuraterte oppsummeringer, læreplan-lenker og
+# diskusjonsspørsmål. Nøkkel = tema (må matche "tema" i plan.yaml).
+# Legg til nye temaer her etter hvert som klassen jobber med dem,
+# så dukker de opp automatisk på siden.
+# ============================================================
+
+"Etikk":
+  blurb: "Filosofihistoriens ideer om rett og galt, brukt til å diskutere dagsaktuelle spørsmål – og øving på å være uenig på en god måte."
+  laerer:
+    - "Hvordan kjente filosofer har tenkt om rett og galt – bl.a. dydsetikk (bli et godt menneske), pliktetikk (følge gode regler) og konsekvensetikk (se på følgene)"
+    - "Å bruke disse tankemåtene til å diskutere dagsaktuelle etiske spørsmål"
+    - "Å håndtere uenighet og se en sak fra flere sider"
+    - "Å reflektere over de store spørsmålene ved å vokse opp i et mangfoldig samfunn"
+  laereplan: {label: "Se i læreplanen (udir)", url: "https://www.udir.no/lk20/rle01-03/kompetansemaal-og-vurdering/kv178"}
+  ressurs:   {label: "Dydsetikk, pliktetikk og konsekvensetikk (NDLA)", url: "https://ndla.no/nb/r/religion-og-etikk/konsekvensetikk-pliktetikk-og-dydsetikk/ff79e905a3"}
+  sporsmal:
+    - "Er en handling god hvis den fører til noe bra (konsekvens), eller hvis den følger en god regel (plikt)? Hva veier tyngst for deg?"
+    - "Finnes det handlinger som alltid er gale, uansett konsekvensene?"
+    - "Kan to personer være uenige om noe moralsk uten at én av dem «tar feil»?"
+
+"Kampen om Afrika":
+  blurb: "Hvordan europeiske stormakter erobret nesten hele Afrika mellom 1870 og 1914, hvilke følger det fikk, og hva som henger igjen i dag."
+  laerer:
+    - "Hvorfor europeiske land erobret nesten hele Afrika mellom 1870 og 1914 (jakt på råvarer og markeder, nasjonalisme, rivalisering – og datidens «siviliseringstanke»)"
+    - "Hvilke følger koloniseringen fikk for ulike land i Afrika"
+    - "Hvordan dette henger sammen med verden slik den er i dag"
+    - "Om holdninger fra kolonitiden fremdeles finnes"
+  laereplan: {label: "Se i læreplanen (udir)", url: "https://www.udir.no/lk20/saf01-04/kompetansemaal-og-vurdering/kv147"}
+  ressurs:   {label: "Imperialismens tidsalder (NDLA)", url: "https://ndla.no/nb/r/historie-pb/imperialismens-tidsalder/aadbcfeb92"}
+  sporsmal:
+    - "Hvorfor tror du så mange land ville erobre Afrika på så kort tid?"
+    - "Ser vi fortsatt spor av kolonitiden i dag – i landegrenser, språk eller økonomi?"
+    - "Datidens europeere snakket om «den hvite manns byrde». Hva forteller det oss om hvordan de så på andre folk?"
+
+"Out of This World (Fantasy & Sci-Fi)":
+  blurb: "Fantasy og science fiction: hva som kjennetegner sjangrene, hvordan de skiller seg fra hverandre, og sammenligning av bøker og film."
+  laerer:
+    - "Hva som kjennetegner fantasy og science fiction"
+    - "Forskjeller og likheter mellom sjangrene – i bøker og film"
+    - "Å snakke, lese og lytte på engelsk om temaet"
+    - "Vurdering: skrive en tekst eller lage en podkast (dato: sjekk Vigilo/Classroom)"
+  laereplan: {label: "Se i læreplanen (udir)", url: "https://www.udir.no/lk20/eng01-05/kompetansemaal-og-vurdering/kv903"}
+  ressurs: null
+  sporsmal:
+    - "Hva skiller science fiction fra fantasy – og hvorfor blandes de ofte?"
+    - "Hvilken film eller bok i disse sjangrene har gjort mest inntrykk på deg, og hvorfor?"
+    - "Sci-fi handler ofte om fremtiden – hvilken teknologi fra en film tror du kan bli virkelig?"
+
+"Oppsummering":
+  blurb: "Repetisjon av årets temaer før sommeren."
+  laerer:
+    - "Repetisjon av årets temaer: tall og algebra, funksjoner, geometri, statistikk og sannsynlighet"
+  laereplan: {label: "Se i læreplanen (udir)", url: "https://www.udir.no/lk20/mat01-05/kompetansemaal-og-vurdering/kv14"}
+  ressurs: null
+  sporsmal:
+    - "Hvilket matematikktema satt best i år – og hvilket var vanskeligst?"
+
+"Oppsummering (naturfag)":
+  blurb: "Repetisjon av årets temaer, blant annet nerve- og hormonsystemet."
+  laerer:
+    - "Repetisjon av årets temaer, bl.a. nerve- og hormonsystemet og hvordan signalsystemene i kroppen påvirkes"
+  laereplan: {label: "Se i læreplanen (udir)", url: "https://www.udir.no/lk20/nat01-04/kompetansemaal-og-vurdering/kv78"}
+  ressurs: null
+  sporsmal:
+    - "Hva var det mest overraskende du lærte i naturfag i år?"
+
+"Skolerunden":
+  blurb: "Uteøkt og løping. Husk gymtøy på kroppsøvingsdagene."
+  laerer:
+    - "Uteøkt og skolerunden (løping/aktivitet ute)"
+  laereplan: null
+  ressurs: null
+  sporsmal: []
+
+"Musikk og samfunn":
+  blurb: "Hvordan musikk henger sammen med og påvirker samfunnet."
+  laerer:
+    - "Hvordan musikk speiler og påvirker samfunnet"
+  laereplan: null
+  ressurs: null
+  sporsmal:
+    - "Finnes det en sang som har betydd noe for en hel generasjon? Hvilken, og hvorfor?"

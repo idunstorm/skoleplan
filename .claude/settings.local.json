@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(gh auth *)",
+      "Bash(command -v gh)",
+      "Bash(echo \"gh exit: $?\")",
+      "Bash(command -v git)",
+      "Bash(echo \"git exit: $?\")",
+      "Bash(gh --version)",
+      "Bash(env)",
+      "Bash(git config *)",
+      "Bash(command -v brew)",
+      "Read(//Users/idunstorm/.config/**)"
+    ]
+  }
+}

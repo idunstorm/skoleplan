@@ -1,0 +1,82 @@
+name: Bygg og publiser skoleplan
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - "data/**"
+      - "app_template.html"
+      - "build.py"
+      - ".github/workflows/site.yml"
+  schedule:
+    - cron: "17 5 * * *"      # daglig ~07:17 norsk tid (sommer)
+  workflow_dispatch: {}
+
+permissions:
+  contents: write     # committe oppdatert plan.yaml / state
+  pages: write        # publisere til GitHub Pages
+  id-token: write     # kreves av Pages-deploy
+  issues: write       # varsle om ny plan
+
+concurrency:
+  group: skoleplan
+  cancel-in-progress: false
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Installer avhengigheter
+        run: pip install -r requirements.txt
+
+      # Daglig/på forespørsel: sjekk om planen er endret
+      - name: Sjekk for ny ukeplan
+        id: check
+        if: github.event_name != 'push'
+        env:
+          AUTO_APPLY: "1"            # oppdater ukenummer automatisk (trygt)
+        run: python check.py
+
+      - name: Bygg side og kalender
+        run: python build.py
+
+      - name: Last opp Pages-artefakt
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+      - name: Publiser til GitHub Pages
+        id: deploy
+        uses: actions/deploy-pages@v4
+
+      - name: Lagre oppdatert tilstand
+        if: github.event_name != 'push'
+        run: |
+          git config user.name  "skoleplan-bot"
+          git config user.email "actions@github.com"
+          git add data/plan.yaml .state.json _incoming/ 2>/dev/null || true
+          if ! git diff --cached --quiet; then
+            git commit -m "Auto: oppdatert plan/tilstand ($(date +%F))"
+            git push
+          else
+            echo "Ingen endringer å committe."
+          fi
+
+      - name: Varsle om ny ukeplan
+        if: steps.check.outputs.new_plan == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh issue create \
+            --title "Ny ukeplan oppdaget (uke ${{ steps.check.outputs.weeks }})" \
+            --body-file _incoming/ny-plan.md \
+            || echo "Klarte ikke opprette sak (fortsetter)."

@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="nb">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Skoleplan">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#16302A">
+<title>Skoleplan – Samson 9C</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#EDF0EC; --card:#FCFDFB; --ink:#16302A; --ink-soft:#4B5A53;
+    --line:#D6DDD5; --line-soft:#E4E9E2;
+    --fjord:#1E6E63; --fjord-deep:#123A33;
+    --prove:#B23A1E; --frist:#B5701A; --husk:#B08600; --tur:#2E6B9E; --tema:#1E6E63;
+    --shadow:0 1px 2px rgba(18,58,51,.06),0 8px 24px rgba(18,58,51,.05);
+    --r:14px;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{background:var(--paper);color:var(--ink);font-family:Inter,system-ui,sans-serif;font-size:16px;line-height:1.5;-webkit-text-size-adjust:100%;padding-bottom:88px}
+  .wrap{max-width:640px;margin:0 auto;padding:0 16px}
+  a{color:var(--fjord);text-decoration:none}
+  a:hover{text-decoration:underline}
+  h1,h2,h3{font-family:Fraunces,Georgia,serif;font-weight:600;letter-spacing:-.01em;margin:0}
+  .mono{font-family:'IBM Plex Mono',ui-monospace,monospace}
+  header{padding:22px 0 8px}
+  .kicker{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--fjord);font-weight:600}
+  header h1{font-size:30px;line-height:1.05;margin-top:4px}
+  header h1 span{color:var(--ink-soft);font-weight:500}
+  .status{margin:14px 0 4px;background:var(--fjord-deep);color:#EAF2EF;border-radius:var(--r);padding:14px 16px;display:flex;flex-wrap:wrap;gap:4px 18px;align-items:baseline;box-shadow:var(--shadow)}
+  .status .big{font-family:Fraunces,serif;font-size:19px;color:#fff}
+  .status .lbl{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#9DBBB3;display:block}
+  .status .col{padding:2px 0}
+  .status .sync{margin-left:auto}
+  .dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;vertical-align:middle}
+  .dot.ok{background:#5FB98C}.dot.warn{background:#E0B23C}.dot.off{background:#C98B7A}
+  nav.tabs{position:sticky;top:0;z-index:20;background:var(--paper);display:flex;gap:6px;overflow-x:auto;padding:12px 0 10px;margin-bottom:2px;-ms-overflow-style:none;scrollbar-width:none}
+  nav.tabs::-webkit-scrollbar{display:none}
+  .tab{flex:0 0 auto;border:1px solid var(--line);background:var(--card);color:var(--ink-soft);padding:8px 14px;border-radius:999px;font-size:14px;font-weight:500;cursor:pointer;white-space:nowrap}
+  .tab[aria-selected="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
+  section[hidden]{display:none}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);padding:16px;margin-bottom:14px}
+  .muted{color:var(--ink-soft)}
+  .small{font-size:13px}
+  .pill{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;padding:3px 9px;border-radius:999px;line-height:1.3;border:1px solid transparent}
+  .pill::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
+  .p-prove{color:var(--prove);background:#F7E9E4;border-color:#EAD2C8}
+  .p-frist{color:var(--frist);background:#F6ECDB;border-color:#EAD9BF}
+  .p-husk{color:var(--husk);background:#F5EFD3;border-color:#E7DDB0}
+  .p-tur{color:var(--tur);background:#E4EEF5;border-color:#CCE0EE}
+  .p-tema{color:var(--tema);background:#E2EFEA;border-color:#C9E2D8}
+  .today-date{display:flex;align-items:baseline;gap:10px;margin-bottom:2px}
+  .today-date .d{font-family:Fraunces,serif;font-size:40px;line-height:1}
+  .today-date .wd{font-size:15px;color:var(--ink-soft)}
+  .callout{border-left:4px solid var(--husk);padding:10px 12px;border-radius:8px;background:#FAF6E6;margin:10px 0}
+  .callout.tur{border-color:var(--tur);background:#EAF1F7}
+  .callout.frist{border-color:var(--frist);background:#FAF2E4}
+  .callout .t{font-weight:600;font-size:14px;margin-bottom:2px}
+  .empty{color:var(--ink-soft);font-size:14px;padding:6px 0}
+  .day{border-left:4px solid var(--line);padding:2px 0 2px 14px;margin:0 0 16px}
+  .day .dh{display:flex;align-items:baseline;gap:8px;margin-bottom:6px}
+  .day .dh .n{font-family:Fraunces,serif;font-size:18px}
+  .day .dh .dt{font-size:12px;color:var(--ink-soft)}
+  .day.special{border-color:var(--tur)}
+  .day.today-now{border-color:var(--fjord);background:linear-gradient(90deg,rgba(30,110,99,.06),transparent 70%)}
+  .lesson{display:flex;gap:10px;font-size:14px;padding:3px 0;border-bottom:1px dashed var(--line-soft)}
+  .lesson:last-child{border-bottom:0}
+  .lesson .tm{flex:0 0 92px;color:var(--ink-soft);font-size:12.5px;font-family:'IBM Plex Mono',monospace;padding-top:1px}
+  .lesson .sub b{font-weight:600}
+  .lesson .sub .nb{display:block;color:var(--ink-soft);font-size:12.5px}
+  .evt{margin-top:6px;font-size:13.5px}
+  .evt b{font-weight:600}
+  .hw{font-size:13.5px;margin-top:8px}
+  .hw .lead{font-weight:600;color:var(--frist)}
+  .topic{padding:16px}
+  .topic h3{font-size:18px}
+  .topic .fag{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--tema);font-weight:600;margin-bottom:3px}
+  .topic p{margin:8px 0}
+  .learn{background:#F2F6F1;border-radius:10px;padding:10px 12px;margin-top:10px}
+  .learn .lh{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--tema);font-weight:600;margin-bottom:6px}
+  .learn ul{margin:0;padding-left:18px}
+  .learn li{font-size:14.5px;margin:4px 0}
+  .qbox{background:#EFF4F1;border-radius:10px;padding:10px 12px;margin-top:10px}
+  .qbox .qh{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--fjord);font-weight:600;margin-bottom:6px}
+  .q{margin:2px 0;padding-left:18px;position:relative;font-size:14.5px}
+  .q::before{content:"—";position:absolute;left:0;color:var(--fjord)}
+  .links{margin-top:10px;font-size:14px}
+  .exam{display:flex;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line-soft)}
+  .exam:last-child{border-bottom:0}
+  .exam .cd{flex:0 0 62px;text-align:center}
+  .exam .cd .num{font-family:'IBM Plex Mono',monospace;font-size:22px;font-weight:500;line-height:1}
+  .exam .cd .u{font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--ink-soft)}
+  .exam .info b{font-weight:600}
+  .exam .info .m{font-size:13px;color:var(--ink-soft)}
+  .btn{display:inline-flex;align-items:center;gap:8px;background:var(--fjord);color:#fff;border:0;padding:12px 16px;border-radius:12px;font-size:15px;font-weight:600;cursor:pointer;font-family:inherit}
+  .btn.sec{background:var(--card);color:var(--ink);border:1px solid var(--line)}
+  .btn:hover{filter:brightness(1.03)}
+  .row{display:flex;gap:10px;flex-wrap:wrap}
+  .check{display:flex;align-items:flex-start;gap:10px;padding:7px 0;font-size:14.5px}
+  .check input{margin-top:2px;width:18px;height:18px;accent-color:var(--fjord);flex:0 0 auto}
+  .check .cx b{font-weight:600}
+  .check .cx span{display:block;font-size:12.5px;color:var(--ink-soft)}
+  details{border-top:1px solid var(--line-soft);padding-top:10px;margin-top:10px}
+  summary{cursor:pointer;font-weight:600;font-size:14px}
+  textarea,input[type=date]{width:100%;font-family:'IBM Plex Mono',monospace;font-size:13px;border:1px solid var(--line);border-radius:10px;padding:10px;margin-top:8px;background:#fff;color:var(--ink)}
+  textarea{min-height:120px}
+  .hint{font-size:12.5px;color:var(--ink-soft);margin-top:8px}
+  .toast{position:fixed;left:50%;bottom:96px;transform:translateX(-50%);background:var(--ink);color:#fff;padding:10px 16px;border-radius:999px;font-size:14px;opacity:0;transition:opacity .25s;pointer-events:none;z-index:50}
+  .toast.show{opacity:1}
+  hr.soft{border:0;border-top:1px solid var(--line-soft);margin:14px 0}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="kicker">Ytrebygda ungdomsskole</div>
+    <h1 id="hClass">Skoleplan <span>· Samson</span></h1>
+  </header>
+
+  <div class="status" id="status">
+    <div class="col"><span class="lbl">I dag</span><span class="big mono" id="stToday">–</span></div>
+    <div class="col"><span class="lbl">Uke nå</span><span class="big mono" id="stWeek">–</span></div>
+    <div class="col"><span class="lbl">Plan lastet</span><span class="big mono" id="stPlan">–</span></div>
+    <div class="col sync"><span class="lbl">Status</span><span class="big" id="stSync">–</span></div>
+  </div>
+
+  <nav class="tabs" id="tabs" role="tablist">
+    <button class="tab" role="tab" data-tab="today" aria-selected="true">I dag</button>
+    <button class="tab" role="tab" data-tab="week" aria-selected="false">Denne uken</button>
+    <button class="tab" role="tab" data-tab="next" aria-selected="false">Neste uke</button>
+    <button class="tab" role="tab" data-tab="exams" aria-selected="false">Prøver &amp; frister</button>
+    <button class="tab" role="tab" data-tab="topics" aria-selected="false">Temaer</button>
+    <button class="tab" role="tab" data-tab="laereplan" aria-selected="false">Læreplan</button>
+    <button class="tab" role="tab" data-tab="settings" aria-selected="false">Varsler &amp; oppdatering</button>
+  </nav>
+
+  <section id="tab-today" role="tabpanel"></section>
+  <section id="tab-week" role="tabpanel" hidden></section>
+  <section id="tab-next" role="tabpanel" hidden></section>
+  <section id="tab-exams" role="tabpanel" hidden></section>
+  <section id="tab-topics" role="tabpanel" hidden></section>
+  <section id="tab-laereplan" role="tabpanel" hidden></section>
+  <section id="tab-settings" role="tabpanel" hidden></section>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+/* ============================================================
+   DATA – 9C sin plan. Bytt ut PLAN når ny plan kommer, eller lim
+   inn ny JSON under «Varsler & oppdatering».
+   ============================================================ */
+const PLAN = {"klasse": "9C", "elev": "Samson", "valgfag": "Fransk", "aar": 2026, "uker": [25, 26], "oppdatert": "2026-07-14", "doc9c": "https://docs.google.com/document/d/e/2PACX-1vT1Uweya7sdSKaoIRlhltQkJkE0RyiPI3VAIwPSS_v7TEo-cRcaPTwzkmOwuUeu_0Td6km2KH-_iwM2/pub", "kilde9c": "https://www.bergen.kommune.no/omkommunen/avdelinger/ytrebygda-skole/arbeidsplaner", "arshjul": "https://docs.google.com/spreadsheets/d/1ktXyyf_pH3D-Z_2NwcQ9eyByFhLK_zuzOx6zgLX307k/edit?gid=0#gid=0", "kilder": [{"klasse": "9C", "fra": "2026-06-01", "doc": "https://docs.google.com/document/d/e/2PACX-1vT1Uweya7sdSKaoIRlhltQkJkE0RyiPI3VAIwPSS_v7TEo-cRcaPTwzkmOwuUeu_0Td6km2KH-_iwM2/pub"}, {"klasse": "10A", "fra": "2026-08-11", "doc": "https://docs.google.com/document/d/e/2PACX-1vTYhpFV8CFjnH80_qUE__glc_tB6niOE6I7pD2In1nOez5zk5doG3Dlumcz1qmiCALtxRJIND7BUL1B/pub"}], "ukelekse": {"25": "Bruk 15–30 minutter hjemme på å gå gjennom det de har lært på skolen, sammen med en voksen.", "26": ""}, "temaer": [{"fag": "KRLE", "tema": "Etikk", "blurb": "Filosofihistoriens ideer om rett og galt, brukt til å diskutere dagsaktuelle spørsmål – og øving på å være uenig på en god måte.", "laerer": ["Hvordan kjente filosofer har tenkt om rett og galt – bl.a. dydsetikk (bli et godt menneske), pliktetikk (følge gode regler) og konsekvensetikk (se på følgene)", "Å bruke disse tankemåtene til å diskutere dagsaktuelle etiske spørsmål", "Å håndtere uenighet og se en sak fra flere sider", "Å reflektere over de store spørsmålene ved å vokse opp i et mangfoldig samfunn"], "laereplan": {"label": "Se i læreplanen (udir)", "url": "https://www.udir.no/lk20/rle01-03/kompetansemaal-og-vurdering/kv178"}, "ressurs": {"label": "Dydsetikk, pliktetikk og konsekvensetikk (NDLA)", "url": "https://ndla.no/nb/r/religion-og-etikk/konsekvensetikk-pliktetikk-og-dydsetikk/ff79e905a3"}, "sporsmal": ["Er en handling god hvis den fører til noe bra (konsekvens), eller hvis den følger en god regel (plikt)? Hva veier tyngst for deg?", "Finnes det handlinger som alltid er gale, uansett konsekvensene?", "Kan to personer være uenige om noe moralsk uten at én av dem «tar feil»?"]}, {"fag": "Samfunnsfag", "tema": "Kampen om Afrika", "blurb": "Hvordan europeiske stormakter erobret nesten hele Afrika mellom 1870 og 1914, hvilke følger det fikk, og hva som henger igjen i dag.", "laerer": ["Hvorfor europeiske land erobret nesten hele Afrika mellom 1870 og 1914 (jakt på råvarer og markeder, nasjonalisme, rivalisering – og datidens «siviliseringstanke»)", "Hvilke følger koloniseringen fikk for ulike land i Afrika", "Hvordan dette henger sammen med verden slik den er i dag", "Om holdninger fra kolonitiden fremdeles finnes"], "laereplan": {"label": "Se i læreplanen (udir)", "url": "https://www.udir.no/lk20/saf01-04/kompetansemaal-og-vurdering/kv147"}, "ressurs": {"label": "Imperialismens tidsalder (NDLA)", "url": "https://ndla.no/nb/r/historie-pb/imperialismens-tidsalder/aadbcfeb92"}, "sporsmal": ["Hvorfor tror du så mange land ville erobre Afrika på så kort tid?", "Ser vi fortsatt spor av kolonitiden i dag – i landegrenser, språk eller økonomi?", "Datidens europeere snakket om «den hvite manns byrde». Hva forteller det oss om hvordan de så på andre folk?"]}, {"fag": "Engelsk", "tema": "Out of This World (Fantasy & Sci-Fi)", "blurb": "Fantasy og science fiction: hva som kjennetegner sjangrene, hvordan de skiller seg fra hverandre, og sammenligning av bøker og film.", "laerer": ["Hva som kjennetegner fantasy og science fiction", "Forskjeller og likheter mellom sjangrene – i bøker og film", "Å snakke, lese og lytte på engelsk om temaet", "Vurdering: skrive en tekst eller lage en podkast (dato: sjekk Vigilo/Classroom)"], "laereplan": {"label": "Se i læreplanen (udir)", "url": "https://www.udir.no/lk20/eng01-05/kompetansemaal-og-vurdering/kv903"}, "ressurs": null, "sporsmal": ["Hva skiller science fiction fra fantasy – og hvorfor blandes de ofte?", "Hvilken film eller bok i disse sjangrene har gjort mest inntrykk på deg, og hvorfor?", "Sci-fi handler ofte om fremtiden – hvilken teknologi fra en film tror du kan bli virkelig?"]}, {"fag": "Matematikk", "tema": "Oppsummering", "blurb": "Repetisjon av årets temaer før sommeren.", "laerer": ["Repetisjon av årets temaer: tall og algebra, funksjoner, geometri, statistikk og sannsynlighet"], "laereplan": {"label": "Se i læreplanen (udir)", "url": "https://www.udir.no/lk20/mat01-05/kompetansemaal-og-vurdering/kv14"}, "ressurs": null, "sporsmal": ["Hvilket matematikktema satt best i år – og hvilket var vanskeligst?"]}, {"fag": "Naturfag", "tema": "Oppsummering (naturfag)", "blurb": "Repetisjon av årets temaer, blant annet nerve- og hormonsystemet.", "laerer": ["Repetisjon av årets temaer, bl.a. nerve- og hormonsystemet og hvordan signalsystemene i kroppen påvirkes"], "laereplan": {"label": "Se i læreplanen (udir)", "url": "https://www.udir.no/lk20/nat01-04/kompetansemaal-og-vurdering/kv78"}, "ressurs": null, "sporsmal": ["Hva var det mest overraskende du lærte i naturfag i år?"]}, {"fag": "Kroppsøving", "tema": "Skolerunden", "blurb": "Uteøkt og løping. Husk gymtøy på kroppsøvingsdagene.", "laerer": ["Uteøkt og skolerunden (løping/aktivitet ute)"], "laereplan": null, "ressurs": null, "sporsmal": []}, {"fag": "Musikk", "tema": "Musikk og samfunn", "blurb": "Hvordan musikk henger sammen med og påvirker samfunnet.", "laerer": ["Hvordan musikk speiler og påvirker samfunnet"], "laereplan": null, "ressurs": null, "sporsmal": ["Finnes det en sang som har betydd noe for en hel generasjon? Hvilken, og hvorfor?"]}], "vurderinger": [{"fag": "Engelsk", "tittel": "Vurdering: skriving/podkast – Out of This World", "dato": null, "note": "Dato ikke oppgitt i planen – sjekk Vigilo/Google Classroom."}], "dager": [{"uke": 25, "dow": 1, "timer": [{"t": "08:30–10:40", "f": "KRLE"}, {"t": "11:30–12:30", "f": "Fransk (valgfag)"}, {"t": "12:40–13:40", "f": "Norsk"}, {"t": "13:50–14:50", "f": "Naturfag"}], "lekser": [], "husk": [], "hendelser": []}, {"uke": 25, "dow": 2, "timer": [{"t": "08:30–09:30", "f": "Engelsk"}, {"t": "09:40–10:40", "f": "Matematikk", "nb": "Rydde klasserommet / levere Chromebook"}, {"t": "11:30–12:30", "f": "Kroppsøving", "nb": "Skolerunden"}, {"t": "12:40–13:40", "f": "Norsk"}], "lekser": [{"fag": "Matematikk", "tekst": "Matematikkgruppe med Sondre og Ranveig"}], "husk": [{"tekst": "Husk gymtøy (kroppsøving – skolerunden)"}, {"tekst": "Ta med ALT skoleutstyr som er lånt av skolen – skal leveres i dag"}], "hendelser": []}, {"uke": 25, "dow": 3, "spesial": true, "timer": [], "lekser": [], "husk": [{"tekst": "Klær etter været (Bergen) + evt. matpakke/drikke"}], "hendelser": [{"tittel": "Byvandring", "sted": "Oppmøte ved Den blå steinen kl. 11", "slutt": "Ferdig ved Den blå steinen kl. 13", "start": "11:00", "end": "13:00"}]}, {"uke": 25, "dow": 4, "spesial": true, "timer": [], "lekser": [], "husk": [{"tekst": "Gode tursko, klær etter vær, matpakke og drikke – evt. regntøy"}], "hendelser": [{"tittel": "Trefjellstur (Fløien–Rundemannen–Blåmannen)", "sted": "Oppmøte Fløibanestasjonen kl. 10", "slutt": "Tilpasses været", "start": "10:00", "end": "14:00"}]}, {"uke": 25, "dow": 5, "spesial": true, "timer": [], "lekser": [], "husk": [{"tekst": "Klær etter været + evt. matpakke/drikke"}], "hendelser": [{"tittel": "Bergenhus festningsmuseum", "sted": "Oppmøte ved Den blå steinen kl. 10.30", "slutt": "Ferdig i byen ca. kl. 13", "start": "10:30", "end": "13:00"}]}, {"uke": 26, "dow": 1, "spesial": true, "timer": [], "lekser": [], "husk": [{"tekst": "Fjæreklær + sko som tåler vann, klær etter vær, matpakke/drikke"}], "hendelser": [{"tittel": "Livet i fjæren", "sted": "Oppmøte parkeringsplassen ved Arboretet kl. 10 → Sandholna", "slutt": "Avslutter ca. kl. 13 på parkeringsplassen", "start": "10:00", "end": "13:00"}]}, {"uke": 26, "dow": 2, "spesial": true, "timer": [], "lekser": [{"fag": "Matematikk", "tekst": "Til tirsdag"}], "husk": [], "hendelser": [{"tittel": "Aktivitetsdag på skolen", "sted": "Oppmøte kl. 11.50", "slutt": "Ferdig til vanlig tid", "start": "11:50", "end": "14:00"}]}, {"uke": 26, "dow": 3, "spesial": true, "timer": [], "lekser": [], "husk": [], "hendelser": [{"tittel": "Frokost og avslutning for året", "sted": "Oppmøte 8.30 i klasserommet", "slutt": "Ferdig kl. 10.40 – siste skoledag før ferien", "start": "08:30", "end": "10:40"}]}, {"uke": 26, "dow": 4, "spesial": true, "ferie": true, "timer": [], "lekser": [], "husk": [], "hendelser": [{"tittel": "FERIE 🎉", "sted": "Sommerferie starter", "start": null}]}, {"uke": 26, "dow": 5, "spesial": true, "ferie": true, "timer": [], "lekser": [], "husk": [], "hendelser": []}], "beskjeder": [{"dato": "2026-09-03", "type": "info", "tittel": "Foreldremøte 10A", "tekst": "Kl. 18:00 på skolen (eksempel – slett meg)"}]};
+
+const NESTE = {"klasse": "10A", "uke": 34, "doc": "https://docs.google.com/document/d/e/2PACX-1vTYhpFV8CFjnH80_qUE__glc_tB6niOE6I7pD2In1nOez5zk5doG3Dlumcz1qmiCALtxRJIND7BUL1B/pub"};
+
+/* ============================================================ Hjelpere ============================================================ */
+const WD=["Søndag","Mandag","Tirsdag","Onsdag","Torsdag","Fredag","Lørdag"];
+const MND=["jan.","feb.","mars","apr.","mai","juni","juli","aug.","sep.","okt.","nov.","des."];
+function store(k,v){ try{ if(v===undefined) return localStorage.getItem(k); localStorage.setItem(k,v);}catch(e){ store._m=store._m||{}; if(v===undefined) return store._m[k]; store._m[k]=v; } }
+function now(){ const ov=store('dateOverride'); if(ov){const d=new Date(ov+"T09:00:00"); if(!isNaN(d)) return d;} return new Date(); }
+function isoWeek(d){ const t=new Date(Date.UTC(d.getFullYear(),d.getMonth(),d.getDate())); const day=(t.getUTCDay()+6)%7; t.setUTCDate(t.getUTCDate()-day+3); const first=new Date(Date.UTC(t.getUTCFullYear(),0,4)); return 1+Math.round(((t-first)/86400000-3+((first.getUTCDay()+6)%7))/7); }
+function isoYear(d){ const t=new Date(Date.UTC(d.getFullYear(),d.getMonth(),d.getDate())); const day=(t.getUTCDay()+6)%7; t.setUTCDate(t.getUTCDate()-day+3); return t.getUTCFullYear(); }
+function dateOfWeek(week,dow,year){ const simple=new Date(Date.UTC(year,0,1+(week-1)*7)); const d=simple.getUTCDay(); const mon=new Date(simple); if(d<=4) mon.setUTCDate(simple.getUTCDate()-simple.getUTCDay()+1); else mon.setUTCDate(simple.getUTCDate()+8-simple.getUTCDay()); const out=new Date(mon); out.setUTCDate(mon.getUTCDate()+(dow-1)); return out; }
+function fmtDate(d){ return d.getUTCDate()+". "+MND[d.getUTCMonth()]; }
+function sameDay(a,b){ return a.getUTCFullYear()===b.getUTCFullYear()&&a.getUTCMonth()===b.getUTCMonth()&&a.getUTCDate()===b.getUTCDate(); }
+function subLabel(f){ return f==="Språk/arbeidslivsfag" ? PLAN.valgfag+" (valgfag)" : f; }
+function toast(m){ const t=document.getElementById('toast'); t.textContent=m; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),2400); }
+function weekContext(){ const d=now(); const wk=isoWeek(d); const yr=isoYear(d); const [a,b]=PLAN.uker; let state,thisWeek=null,nextWeek=null;
+  if(yr===PLAN.aar&&wk===a){state="A";thisWeek=a;nextWeek=b;} else if(yr===PLAN.aar&&wk===b){state="B";thisWeek=b;nextWeek=null;}
+  else if(yr<PLAN.aar||(yr===PLAN.aar&&wk<a)){state="before";nextWeek=a;} else {state="after";} return {d,wk,yr,state,thisWeek,nextWeek}; }
+function dayObj(week,dow){ return PLAN.dager.find(x=>x.uke===week&&x.dow===dow); }
+function upcomingBeskjeder(){ const d=now(); const t0=new Date(Date.UTC(d.getFullYear(),d.getMonth(),d.getDate()));
+  return (PLAN.beskjeder||[]).map(b=>{ let dt=b.dato?new Date(b.dato+"T00:00:00Z"):null; let days=dt?Math.round((dt-t0)/86400000):null; return Object.assign({},b,{dt,days}); })
+    .filter(b=> b.dt===null || b.days>=0 ).sort((a,b)=>(a.dt?a.dt:8e15)-(b.dt?b.dt:8e15)); }
+function beskjederCard(){ const list=upcomingBeskjeder(); if(!list.length) return '';
+  const pc={info:'p-tur',frist:'p-frist',husk:'p-husk',prove:'p-prove'}; const pl={info:'Info',frist:'Frist',husk:'Husk',prove:'Prøve'};
+  let h='<div class="card"><h2 style="font-size:18px;margin-bottom:8px">Beskjeder</h2><p class="small muted" style="margin-top:-4px;margin-bottom:6px">Fra Vigilo o.l.</p>';
+  list.slice(0,10).forEach(b=>{ h+='<div class="evt" style="margin-top:10px"><span class="pill '+(pc[b.type]||'p-tur')+'">'+(pl[b.type]||'Info')+'</span> <b>'+b.tittel+'</b>';
+    if(b.dt) h+=' <span class="muted small">'+WD[b.dt.getUTCDay()]+' '+fmtDate(b.dt)+(b.days!==null&&b.days>=0&&b.days<=14?' · om '+b.days+' d':'')+'</span>';
+    if(b.tekst) h+='<div class="muted small">'+b.tekst+'</div>'; h+='</div>'; });
+  h+='</div>'; return h; }
+
+/* ============================================================ Rendering ============================================================ */
+function renderStatus(){ const {d,wk,state}=weekContext();
+  document.getElementById('hClass').innerHTML="Skoleplan <span>· "+PLAN.elev+" "+PLAN.klasse+"</span>";
+  document.getElementById('stToday').textContent=fmtDate(new Date(Date.UTC(d.getFullYear(),d.getMonth(),d.getDate())));
+  document.getElementById('stWeek').textContent="uke "+wk;
+  document.getElementById('stPlan').textContent="uke "+PLAN.uker.join("–");
+  const s=document.getElementById('stSync');
+  if(state==="A"||state==="B") s.innerHTML='<span class="dot ok"></span>Planen gjelder nå';
+  else if(state==="before") s.innerHTML='<span class="dot warn"></span>Starter uke '+PLAN.uker[0];
+  else s.innerHTML='<span class="dot off"></span>Utenfor planen'; }
+
+function renderDay(day,dateObj,isToday){ if(!day) return "";
+  let cls="day"+(day.spesial?" special":"")+(isToday?" today-now":"");
+  let h='<div class="'+cls+'"><div class="dh"><span class="n">'+WD[dateObj.getUTCDay()]+'</span><span class="dt mono">'+fmtDate(dateObj)+(isToday?' · i dag':'')+'</span></div>';
+  if(day.ferie){ h+='<div class="empty">Sommerferie 🎉</div></div>'; return h; }
+  (day.hendelser||[]).forEach(ev=>{ if(!ev)return; h+='<div class="evt"><span class="pill p-tur">Tur / aktivitet</span> <b>'+ev.tittel+'</b>'; if(ev.sted)h+='<div class="muted small">'+ev.sted+'</div>'; if(ev.slutt)h+='<div class="muted small">'+ev.slutt+'</div>'; h+='</div>'; });
+  (day.timer||[]).forEach(l=>{ h+='<div class="lesson"><span class="tm">'+l.t+'</span><span class="sub"><b>'+subLabel(l.f)+'</b>'+(l.nb?'<span class="nb">'+l.nb+'</span>':'')+'</span></div>'; });
+  (day.husk||[]).forEach(x=>{ h+='<div class="evt"><span class="pill p-husk">Husk</span> '+x.tekst+'</div>'; });
+  if((day.lekser||[]).length){ h+='<div class="hw"><span class="lead">Til i dag:</span> '+day.lekser.map(x=>(x.fag?x.fag+' – ':'')+x.tekst).join(' · ')+'</div>'; }
+  h+='</div>'; return h; }
+
+function renderWeek(container,week,heading){ const el=document.getElementById(container);
+  if(!week){ el.innerHTML='<div class="card"><p class="muted">Ingen uke å vise her ennå. Neste plan kommer når skolen legger den ut.</p></div>'; return; }
+  const today=now(); let h='<div class="card">'; const uke=PLAN.ukelekse[week];
+  h+='<h2 style="font-size:20px">'+heading+' <span class="mono muted" style="font-size:14px">· uke '+week+'</span></h2>';
+  if(uke){ h+='<div class="callout"><div class="t">Ukelekse</div><div class="small">'+uke+'</div>'
+    +'<div class="small" style="margin-top:6px">Læringsmålene ligger i <b>Læreplan</b>-fanen.'+(PLAN.arshjul?' · <a href="'+PLAN.arshjul+'" target="_blank" rel="noopener">Åpne årshjulet ↗</a>':'')+'</div></div>'; }
+  h+='</div><div class="card">';
+  for(let dow=1;dow<=5;dow++){ const d=dayObj(week,dow); const dt=dateOfWeek(week,dow,PLAN.aar); h+=renderDay(d,dt,sameDay(new Date(Date.UTC(today.getFullYear(),today.getMonth(),today.getDate())),dt)); }
+  h+='</div>'; el.innerHTML=h; }
+
+function renderToday(){ const el=document.getElementById('tab-today'); const {d,state,thisWeek}=weekContext();
+  let h='<div class="card"><div class="today-date"><span class="d">'+d.getDate()+'.</span><span class="wd">'+WD[d.getDay()]+' '+MND[d.getMonth()]+' '+d.getFullYear()+'</span></div>';
+  if(state!=="A"&&state!=="B"){
+    if(state==="after"){ h+='<p class="muted">Planen for uke '+PLAN.uker.join("–")+' er avsluttet. Vi er i uke '+isoWeek(d)+'. Neste plan: <b>'+NESTE.klasse+'</b> fra rundt uke '+NESTE.uke+' (skolestart i august).</p>'; }
+    else { h+='<p class="muted">Planen gjelder uke '+PLAN.uker.join("–")+'. Den starter '+fmtDate(dateOfWeek(PLAN.uker[0],1,PLAN.aar))+'.</p>'; }
+    h+='<hr class="soft"><p class="small muted">Du kan likevel bla i planen via fanene, eller forhåndsvise en annen dato under «Varsler &amp; oppdatering».</p></div>';
+    h+=beskjederCard(); el.innerHTML=h; return; }
+  const dow=d.getDay(); const todayDay=(dow>=1&&dow<=5)?dayObj(thisWeek,dow):null;
+  let reminders=[];
+  if(todayDay){ (todayDay.husk||[]).forEach(x=>reminders.push({when:"I dag",cls:"",txt:x.tekst})); (todayDay.hendelser||[]).forEach(ev=>{if(ev&&ev.sted)reminders.push({when:"I dag",cls:"tur",txt:ev.tittel+" – "+ev.sted});}); }
+  let tomWeek=thisWeek,tomDow=dow+1; if(tomDow>5){tomDow=1;tomWeek=(state==="A")?PLAN.uker[1]:null;}
+  if(tomWeek){ const td=dayObj(tomWeek,tomDow); if(td){ (td.husk||[]).forEach(x=>reminders.push({when:"I morgen",cls:"",txt:x.tekst})); (td.hendelser||[]).forEach(ev=>{if(ev&&ev.sted)reminders.push({when:"I morgen",cls:"tur",txt:ev.tittel+" – "+ev.sted});}); (td.lekser||[]).forEach(x=>reminders.push({when:"I morgen",cls:"frist",txt:"Lekse: "+(x.fag?x.fag+" – ":"")+x.tekst})); } }
+  if(reminders.length){ h+='<div style="margin-top:6px">'; reminders.forEach(r=>{h+='<div class="callout '+r.cls+'"><div class="t">'+r.when+'</div><div class="small">'+r.txt+'</div></div>';}); h+='</div>'; }
+  else { h+='<div class="empty">Ingenting spesielt å huske akkurat nå. 👍</div>'; }
+  h+='</div>';
+  h+=beskjederCard();
+  if(dow>=1&&dow<=5){ h+='<div class="card"><h2 style="font-size:18px;margin-bottom:8px">Timeplan i dag</h2>'+renderDay(todayDay||{timer:[]},dateOfWeek(thisWeek,dow,PLAN.aar),false)+'</div>'; }
+  el.innerHTML=h; }
+
+function renderExams(){ const el=document.getElementById('tab-exams'); const today=now(); const t0=new Date(Date.UTC(today.getFullYear(),today.getMonth(),today.getDate()));
+  let items=[]; (PLAN.vurderinger||[]).forEach(v=>{ let dt=null,days=null; if(v.dato){dt=new Date(v.dato+"T00:00:00Z");days=Math.round((dt-t0)/86400000);} items.push({...v,dt,days}); });
+  items.sort((a,b)=>(a.dt?a.dt:8e15)-(b.dt?b.dt:8e15));
+  let h='<div class="card"><h2 style="font-size:20px">Prøver &amp; innleveringer</h2>';
+  if(!items.length){ h+='<p class="empty">Ingen prøver eller innleveringer er lagt inn i denne planen.</p></div>'; el.innerHTML=h; return; }
+  items.forEach(v=>{ h+='<div class="exam"><div class="cd">'; if(v.days!==null){h+='<div class="num">'+(v.days>=0?v.days:0)+'</div><div class="u">'+(v.days===1?'dag':'dager')+'</div>';} else {h+='<div class="num">?</div><div class="u">dato</div>';} h+='</div><div class="info"><span class="pill p-prove">'+v.fag+'</span><br><b>'+v.tittel+'</b>'; if(v.dt)h+='<div class="m">'+WD[v.dt.getUTCDay()]+' '+fmtDate(v.dt)+'</div>'; if(v.note)h+='<div class="m">'+v.note+'</div>'; h+='</div></div>'; });
+  h+='</div><div class="card small muted">Nye prøver dukker ofte opp i «Ukeinfo» i planen eller som melding i Vigilo/Classroom. Legg dem inn via oppdatering, så teller appen ned – og de kan legges i kalendervarslene.</div>';
+  el.innerHTML=h; }
+
+function renderTopics(){ const el=document.getElementById('tab-topics');
+  let h='<div class="card"><h2 style="font-size:20px">Temaer å snakke om</h2><p class="small muted">Korte innganger til middagspraten – med noen spørsmål å diskutere.</p></div>';
+  PLAN.temaer.forEach(t=>{ if(!t.tema&&!t.blurb)return;
+    h+='<div class="card topic"><div class="fag">'+t.fag+'</div><h3>'+(t.tema||t.fag)+'</h3>';
+    if(t.blurb) h+='<p>'+t.blurb+'</p>';
+    if(t.ressurs) h+='<div class="links"><a href="'+t.ressurs.url+'" target="_blank" rel="noopener">'+t.ressurs.label+' ↗</a></div>';
+    if(t.sporsmal&&t.sporsmal.length){ h+='<div class="qbox"><div class="qh">Snakk om</div>'+t.sporsmal.map(q=>'<div class="q">'+q+'</div>').join('')+'</div>'; }
+    h+='</div>'; });
+  el.innerHTML=h; }
+
+function renderLaereplan(){ const el=document.getElementById('tab-laereplan');
+  let h='<div class="card"><h2 style="font-size:20px">Hva de skal lære nå</h2>'
+    +'<p class="small muted">Kort oppsummering av det klassen jobber med i uke '+PLAN.uker.join("–")+', med lenke til temaet i den nasjonale læreplanen (LK20).</p></div>';
+  PLAN.temaer.forEach(t=>{ if(!(t.laerer&&t.laerer.length))return;
+    h+='<div class="card topic"><div class="fag">'+t.fag+'</div><h3>'+(t.tema||t.fag)+'</h3>';
+    h+='<div class="learn"><div class="lh">Det de skal lære</div><ul>'+t.laerer.map(x=>'<li>'+x+'</li>').join('')+'</ul></div>';
+    let links=[]; if(t.laereplan) links.push('<a href="'+t.laereplan.url+'" target="_blank" rel="noopener">'+t.laereplan.label+' ↗</a>'); if(t.ressurs) links.push('<a href="'+t.ressurs.url+'" target="_blank" rel="noopener">'+t.ressurs.label+' ↗</a>');
+    if(links.length) h+='<div class="links">'+links.join(' · ')+'</div>';
+    h+='</div>'; });
+  el.innerHTML=h; }
+
+/* ---------- Kalender (.ics) ---------- */
+function icsPad(n){return String(n).padStart(2,'0');}
+function icsDate(d){return d.getUTCFullYear()+icsPad(d.getUTCMonth()+1)+icsPad(d.getUTCDate());}
+function icsStamp(){const n=new Date();return n.getUTCFullYear()+icsPad(n.getUTCMonth()+1)+icsPad(n.getUTCDate())+'T'+icsPad(n.getUTCHours())+icsPad(n.getUTCMinutes())+icsPad(n.getUTCSeconds())+'Z';}
+function icsLocal(d,hh,mm){return d.getUTCFullYear()+icsPad(d.getUTCMonth()+1)+icsPad(d.getUTCDate())+'T'+icsPad(hh)+icsPad(mm)+'00';}
+function icsEsc(s){return String(s).replace(/([,;\\])/g,'\\$1').replace(/\n/g,'\\n');}
+function buildICS(opts){
+  opts=opts||{exams:true,lekser:true,husk:true,turer:false,sunday:false};
+  let uid=0; const ev=[];
+  function vevent(body){ ev.push('BEGIN:VEVENT\r\nUID:sp-'+(uid++)+'-'+Date.now()+'@samson\r\nDTSTAMP:'+icsStamp()+'\r\n'+body+'END:VEVENT\r\n'); }
+  function alarms(arr,sum){ return (arr||[]).map(a=>'BEGIN:VALARM\r\nACTION:DISPLAY\r\nDESCRIPTION:'+icsEsc(sum)+'\r\nTRIGGER:'+a+'\r\nEND:VALARM\r\n').join(''); }
+  function allDay(d,sum,al,desc){ const end=new Date(d); end.setUTCDate(d.getUTCDate()+1);
+    let s='DTSTART;VALUE=DATE:'+icsDate(d)+'\r\nDTEND;VALUE=DATE:'+icsDate(end)+'\r\nTRANSP:TRANSPARENT\r\nSUMMARY:'+icsEsc(sum)+'\r\n';
+    if(desc)s+='DESCRIPTION:'+icsEsc(desc)+'\r\n'; s+=alarms(al,sum); vevent(s); }
+  function timed(d,sh,sm,eh,em,sum,loc,desc,al){ let s='DTSTART;TZID=Europe/Oslo:'+icsLocal(d,sh,sm)+'\r\nDTEND;TZID=Europe/Oslo:'+icsLocal(d,eh,em)+'\r\nTRANSP:TRANSPARENT\r\nSUMMARY:'+icsEsc(sum)+'\r\n';
+    if(loc)s+='LOCATION:'+icsEsc(loc)+'\r\n'; if(desc)s+='DESCRIPTION:'+icsEsc(desc)+'\r\n'; s+=alarms(al,sum); vevent(s); }
+  const HH=t=>t?parseInt(t.split(':')[0],10):8, MM=t=>t?parseInt(t.split(':')[1],10):0;
+  PLAN.dager.forEach(day=>{ const d=dateOfWeek(day.uke,day.dow,PLAN.aar);
+    if(opts.turer)(day.hendelser||[]).forEach(e=>{ if(e&&e.start) timed(d,HH(e.start),MM(e.start),HH(e.end||'14:00'),MM(e.end||'14:00'),e.tittel,e.sted||'',e.slutt||'',['-PT14H','-PT1H']); });
+    if(opts.husk)(day.husk||[]).forEach(x=> allDay(d,'Husk: '+x.tekst,['-PT6H','PT8H']) );
+    if(opts.lekser)(day.lekser||[]).forEach(x=> allDay(d,'Lekse: '+(x.fag?x.fag+' – ':'')+x.tekst,['-PT6H']) );
+  });
+  if(opts.exams)(PLAN.vurderinger||[]).forEach(v=>{ if(v.dato){ const d=new Date(v.dato+'T00:00:00Z'); allDay(d,v.fag+': '+v.tittel,['-P6DT18H','-P1DT6H','PT8H'],v.note||''); } });
+  if(opts.sunday)PLAN.uker.forEach(w=>{ const man=dateOfWeek(w,1,PLAN.aar); const sun=new Date(man); sun.setUTCDate(man.getUTCDate()-1); timed(sun,18,0,18,15,'Ukesoversikt: uke '+w+' ('+PLAN.klasse+')','','Se skoleplan-appen for uken.',['-PT0M']); });
+  return 'BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//Skoleplan//Samson//NB\r\nCALSCALE:GREGORIAN\r\nMETHOD:PUBLISH\r\nX-WR-CALNAME:Skole '+PLAN.klasse+' – '+PLAN.elev+'\r\n'+ev.join('')+'END:VCALENDAR\r\n';
+}
+function downloadICS(){
+  const opts={ exams:document.getElementById('optExams').checked, lekser:document.getElementById('optLekser').checked, husk:document.getElementById('optHusk').checked, turer:document.getElementById('optTurer').checked, sunday:document.getElementById('optSunday').checked };
+  if(!opts.exams&&!opts.lekser&&!opts.husk&&!opts.turer&&!opts.sunday){ toast('Velg minst én type varsler'); return; }
+  const blob=new Blob([buildICS(opts)],{type:'text/calendar;charset=utf-8'}); const url=URL.createObjectURL(blob);
+  const a=document.createElement('a'); a.href=url; a.download='skole-'+PLAN.klasse+'-uke'+PLAN.uker.join('-')+'.ics'; document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(url),1500);
+  toast('Kalenderfil lastet ned – åpne den for å legge varslene i kalenderen');
+}
+
+function renderSettings(){ const el=document.getElementById('tab-settings'); const ov=store('dateOverride')||'';
+  let h='';
+  h+='<div class="card"><h2 style="font-size:20px">Legg varslene i kalenderen</h2>'
+    +'<p class="small">Velg hva du vil ha varsler om. Alt legges inn som <b>heldags og «ledig»</b>, så det aldri legger seg oppå møtene i jobbkalenderen din.</p>'
+    +'<div style="margin-top:10px">'
+    +'<label class="check"><input type="checkbox" id="optExams" checked><span class="cx"><b>Prøver og innleveringer</b><span>Varsel 7 dager før, 2 dager før og om morgenen</span></span></label>'
+    +'<label class="check"><input type="checkbox" id="optLekser" checked><span class="cx"><b>Lekser og innleveringer</b><span>Varsel kvelden før</span></span></label>'
+    +'<label class="check"><input type="checkbox" id="optHusk" checked><span class="cx"><b>Ting å huske</b><span>Gymtøy, svømmetøy, turklær, lånt utstyr o.l. – varsel kvelden før + om morgenen</span></span></label>'
+    +'<label class="check"><input type="checkbox" id="optTurer"><span class="cx"><b>Turer og aktiviteter</b><span>Byvandring, fjelltur, aktivitetsdag – med oppmøtested og -tid</span></span></label>'
+    +'<label class="check"><input type="checkbox" id="optSunday"><span class="cx"><b>Ukesoversikt (søndag)</b><span>Kort påminnelse søndag kveld om uken som kommer</span></span></label>'
+    +'</div>'
+    +'<div class="row" style="margin-top:12px"><button class="btn" onclick="downloadICS()">Last ned kalenderfil (.ics)</button></div>'
+    +'<p class="hint">Tips: Lag gjerne en egen kalender «Skole – Samson» og importer fila dit, så holder skoletingene seg adskilt fra resten.</p>'
+    +'<p class="hint"><b>Merk:</b> Dette er en engangs-import – den oppdateres <b>ikke</b> av seg selv når ny plan kommer. Vil du ha en kalender som oppdaterer seg automatisk, kan vi sette opp en abonnement-kalender (en fast lenke telefonen henter fra). Si ifra, så ordner jeg det.</p></div>';
+
+  h+='<div class="card"><h2 style="font-size:20px">Legg appen på hjemskjermen</h2>'
+    +'<p class="small"><b>iPhone:</b> Åpne siden i Safari → Del-knappen → «Legg til på Hjem-skjerm».<br><b>Android:</b> Åpne i Chrome → meny (⋮) → «Legg til på startskjerm».</p></div>';
+
+  h+='<div class="card"><h2 style="font-size:20px">Når ny plan kommer</h2>'
+    +'<p class="small">Fasiten er alltid skolens klasseside – der ligger den ferske lenken for 9C:</p>'
+    +'<p class="small"><a href="'+PLAN.doc9c+'" target="_blank" rel="noopener">Åpne 9C-planen ↗</a> · <a href="'+PLAN.kilde9c+'" target="_blank" rel="noopener">Alle klasser hos skolen ↗</a></p>'
+    +'<p class="small">Fra august (10A): <a href="'+NESTE.doc+'" target="_blank" rel="noopener">Åpne 10A-planen ↗</a></p>'
+    +'<hr class="soft"><p class="small">Enkleste måte å oppdatere: send meg (Claude) den nye lenken, så får du en oppdatert fil tilbake. Eller lim inn ny JSON her (varer ut økten på denne enheten):</p>'
+    +'<textarea id="jsonBox" placeholder="Lim inn oppdatert PLAN-JSON her ..."></textarea>'
+    +'<div class="row" style="margin-top:8px"><button class="btn sec" onclick="applyJSON()">Bruk innlimt plan</button><button class="btn sec" onclick="copyTemplate()">Kopier dagens plan som mal</button></div></div>';
+
+  h+='<div class="card"><h2 style="font-size:20px">Forhåndsvis en annen dato</h2>'
+    +'<p class="small">Se hvordan appen ser ut på en skoledag (nyttig nå i ferien). Sett en dato i uke '+PLAN.uker[0]+' eller '+PLAN.uker[1]+':</p>'
+    +'<input type="date" id="ovDate" value="'+ov+'">'
+    +'<div class="row" style="margin-top:8px"><button class="btn sec" onclick="setOverride()">Bruk dato</button><button class="btn sec" onclick="clearOverride()">Tilbake til i dag</button></div></div>';
+  el.innerHTML=h; }
+
+function applyJSON(){ try{ const raw=document.getElementById('jsonBox').value.trim(); if(!raw){toast('Lim inn JSON først');return;} const obj=JSON.parse(raw); Object.keys(PLAN).forEach(k=>delete PLAN[k]); Object.assign(PLAN,obj); store('planOverride',raw); renderAll(); toast('Ny plan lastet inn'); }catch(e){ toast('Kunne ikke lese JSON – sjekk formatet'); } }
+function copyTemplate(){ const txt=JSON.stringify(PLAN,null,2); if(navigator.clipboard){navigator.clipboard.writeText(txt).then(()=>toast('Plan kopiert til utklippstavlen')).catch(()=>{document.getElementById('jsonBox').value=txt;toast('La malen i tekstboksen');});} else {document.getElementById('jsonBox').value=txt;toast('La malen i tekstboksen');} }
+function setOverride(){ const v=document.getElementById('ovDate').value; if(!v){toast('Velg en dato');return;} store('dateOverride',v); renderAll(); toast('Viser '+v); switchTab('today'); }
+function clearOverride(){ try{localStorage.removeItem('dateOverride');}catch(e){ if(store._m)delete store._m['dateOverride']; } renderAll(); toast('Tilbake til dagens dato'); }
+
+function renderAll(){ const {thisWeek,state}=weekContext(); renderStatus(); renderToday();
+  let wThis=(state==="A"||state==="B")?thisWeek:PLAN.uker[0];
+  let wNext=(state==="A")?PLAN.uker[1]:(state==="before"?PLAN.uker[0]:(state==="B"?null:PLAN.uker[1]));
+  renderWeek('tab-week',wThis,(state==="A"||state==="B")?"Denne uken":"Uke "+PLAN.uker[0]);
+  renderWeek('tab-next',wNext,"Neste uke");
+  renderExams(); renderTopics(); renderLaereplan(); renderSettings(); }
+function switchTab(name){ document.querySelectorAll('.tab').forEach(b=>b.setAttribute('aria-selected',b.dataset.tab===name));
+  ['today','week','next','exams','topics','laereplan','settings'].forEach(t=>{ document.getElementById('tab-'+t).hidden=(t!==name); }); window.scrollTo({top:0,behavior:'instant'}); }
+document.getElementById('tabs').addEventListener('click',e=>{ const b=e.target.closest('.tab'); if(b) switchTab(b.dataset.tab); });
+
+(function(){ const p=store('planOverride'); if(p){ try{const o=JSON.parse(p);Object.keys(PLAN).forEach(k=>delete PLAN[k]);Object.assign(PLAN,o);}catch(e){} } })();
+renderAll();
+</script>
+</body>
+</html>

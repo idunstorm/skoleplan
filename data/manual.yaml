@@ -1,0 +1,35 @@
+# ============================================================
+# VIGILO / MANUELT – ting du får beskjed om utenom ukeplanen.
+# Rediger denne fila (også fra mobilen i GitHub) og lagre –
+# siden og kalenderen oppdaterer seg automatisk.
+#
+# type: info | husk | frist | prove
+#   info  = generell beskjed (foreldremøte, temadag ...)
+#   husk  = ta med noe en bestemt dag
+#   frist = innlevering / påmelding
+#   prove = prøve / vurdering  (får varsel 7 og 2 dager før)
+# dato: ÅÅÅÅ-MM-DD  (utelat hvis beskjeden ikke har en dato)
+# ============================================================
+
+beskjeder:
+  # Eksempel – bytt ut med ekte Vigilo-beskjeder:
+  - {dato: "2026-09-03", type: "info",  tittel: "Foreldremøte 10A", tekst: "Kl. 18:00 på skolen (eksempel – slett meg)"}
+  # - {dato: "2026-09-15", type: "prove", tittel: "Prøve i matematikk", tekst: "Kapittel 1–2"}
+  # - {dato: "2026-09-10", type: "frist", tittel: "Levere samtykkeskjema", tekst: "Leveres i Vigilo"}
+  # - {dato: "2026-09-08", type: "husk",  tittel: "Ta med gymtøy ekstra dag"}
+  # - {type: "info", tittel: "Ny rektor fra høsten"}   # uten dato = vises som pinned info
+
+# (Avansert, valgfritt) Overstyr eller legg til enkeltdager i planen.
+# Samme format som "dager" i plan.yaml. Vanligvis ikke nødvendig.
+overstyr_dager: []
+
+# ============================================================
+# KALENDER – hva som skal med i abonnement-kalenderen (skole.ics).
+# ============================================================
+kalender:
+  vurderinger: true    # prøver/innleveringer med dato
+  lekser: true         # lekser/innleveringer
+  husk: true           # gymtøy, svømmetøy, turklær, lånt utstyr
+  beskjeder: true      # Vigilo-beskjeder (fra lista over)
+  turer: false         # turer/aktiviteter (byvandring, fjelltur ...)
+  sondag: false        # ukesoversikt søndag kveld

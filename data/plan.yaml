@@ -1,0 +1,86 @@
+# ============================================================
+# PLAN – hovedkilden for én toukersplan (9C).
+# Når ny plan kommer: ukenummer oppdateres automatisk. Temaer og
+# timeplan fylles trygt via varselet (send lenken til Claude, eller
+# rediger denne fila / topics.yaml).
+# ============================================================
+klasse: "9C"
+elev: "Samson"
+valgfag: "Fransk"
+aar: 2026
+uker: [25, 26]
+oppdatert: "2026-07-14"
+
+doc9c: "https://docs.google.com/document/d/e/2PACX-1vT1Uweya7sdSKaoIRlhltQkJkE0RyiPI3VAIwPSS_v7TEo-cRcaPTwzkmOwuUeu_0Td6km2KH-_iwM2/pub"
+kilde9c: "https://www.bergen.kommune.no/omkommunen/avdelinger/ytrebygda-skole/arbeidsplaner"
+arshjul: "https://docs.google.com/spreadsheets/d/1ktXyyf_pH3D-Z_2NwcQ9eyByFhLK_zuzOx6zgLX307k/edit?gid=0#gid=0"
+
+# Klasse/kilde byttes automatisk etter dato. 9C nå -> 10A fra skolestart i august.
+# Endre "fra"-datoen hvis skolestart er en annen dag.
+kilder:
+  - {klasse: "9C",  fra: "2026-06-01", doc: "https://docs.google.com/document/d/e/2PACX-1vT1Uweya7sdSKaoIRlhltQkJkE0RyiPI3VAIwPSS_v7TEo-cRcaPTwzkmOwuUeu_0Td6km2KH-_iwM2/pub"}
+  - {klasse: "10A", fra: "2026-08-11", doc: "https://docs.google.com/document/d/e/2PACX-1vTYhpFV8CFjnH80_qUE__glc_tB6niOE6I7pD2In1nOez5zk5doG3Dlumcz1qmiCALtxRJIND7BUL1B/pub"}
+
+neste:
+  klasse: "10A"
+  uke: 34
+  doc: "https://docs.google.com/document/d/e/2PACX-1vTYhpFV8CFjnH80_qUE__glc_tB6niOE6I7pD2In1nOez5zk5doG3Dlumcz1qmiCALtxRJIND7BUL1B/pub"
+
+ukelekse:
+  25: "Bruk 15–30 minutter hjemme på å gå gjennom det de har lært på skolen, sammen
+    med en voksen."
+  26: ""
+
+# Temaer: fag + tema. Oppsummeringer/spørsmål/lenker hentes fra topics.yaml
+# (nøkkel = tema). Ukjente temaer vises med fag/tema til de legges inn der.
+temaer:
+- {fag: "KRLE", tema: "Etikk"}
+- {fag: "Samfunnsfag", tema: "Kampen om Afrika"}
+- {fag: "Engelsk", tema: "Out of This World (Fantasy & Sci-Fi)"}
+- {fag: "Matematikk", tema: "Oppsummering"}
+- {fag: "Naturfag", tema: "Oppsummering (naturfag)"}
+- {fag: "Kroppsøving", tema: "Skolerunden"}
+- {fag: "Musikk", tema: "Musikk og samfunn"}
+
+vurderinger:
+- {fag: "Engelsk", tittel: "Vurdering: skriving/podkast – Out of This World", 
+    dato: null, note: "Dato ikke oppgitt i planen – sjekk Vigilo/Google Classroom."}
+
+dager:
+- {uke: 25, dow: 1, timer: [{t: "08:30–10:40", f: "KRLE"}, {t: "11:30–12:30", f: "Fransk
+        (valgfag)"}, {t: "12:40–13:40", f: "Norsk"}, {t: "13:50–14:50", f: "Naturfag"}],
+  lekser: [], husk: [], hendelser: []}
+- {uke: 25, dow: 2, timer: [{t: "08:30–09:30", f: "Engelsk"}, {t: "09:40–10:40", 
+        f: "Matematikk", nb: "Rydde klasserommet / levere Chromebook"}, {t: "11:30–12:30",
+      f: "Kroppsøving", nb: "Skolerunden"}, {t: "12:40–13:40", f: "Norsk"}], 
+    lekser: [{fag: "Matematikk", tekst: "Matematikkgruppe med Sondre og Ranveig"}],
+  husk: [tekst: "Husk gymtøy (kroppsøving – skolerunden)", tekst: "Ta med ALT skoleutstyr
+        som er lånt av skolen – skal leveres i dag"], hendelser: []}
+- {uke: 25, dow: 3, spesial: true, timer: [], lekser: [], husk: [tekst: "Klær etter
+        været (Bergen) + evt. matpakke/drikke"], hendelser: [{tittel: "Byvandring",
+      sted: "Oppmøte ved Den blå steinen kl. 11", slutt: "Ferdig ved Den blå steinen
+        kl. 13", start: "11:00", end: "13:00"}]}
+- {uke: 25, dow: 4, spesial: true, timer: [], lekser: [], husk: [tekst: "Gode tursko,
+        klær etter vær, matpakke og drikke – evt. regntøy"], hendelser: [{tittel: "Trefjellstur
+        (Fløien–Rundemannen–Blåmannen)", sted: "Oppmøte Fløibanestasjonen kl. 10",
+      slutt: "Tilpasses været", start: "10:00", end: "14:00"}]}
+- {uke: 25, dow: 5, spesial: true, timer: [], lekser: [], husk: [tekst: "Klær etter
+        været + evt. matpakke/drikke"], hendelser: [{tittel: "Bergenhus festningsmuseum",
+      sted: "Oppmøte ved Den blå steinen kl. 10.30", slutt: "Ferdig i byen ca. kl.
+        13", start: "10:30", end: "13:00"}]}
+- {uke: 26, dow: 1, spesial: true, timer: [], lekser: [], husk: [tekst: "Fjæreklær
+        + sko som tåler vann, klær etter vær, matpakke/drikke"], hendelser: [{
+        tittel: "Livet i fjæren", sted: "Oppmøte parkeringsplassen ved Arboretet kl.
+        10 → Sandholna", slutt: "Avslutter ca. kl. 13 på parkeringsplassen", 
+        start: "10:00", end: "13:00"}]}
+- {uke: 26, dow: 2, spesial: true, timer: [], lekser: [{fag: "Matematikk", tekst: "Til
+        tirsdag"}], husk: [], hendelser: [{tittel: "Aktivitetsdag på skolen", 
+        sted: "Oppmøte kl. 11.50", slutt: "Ferdig til vanlig tid", start: "11:50",
+      end: "14:00"}]}
+- {uke: 26, dow: 3, spesial: true, timer: [], lekser: [], husk: [], hendelser: [{
+      tittel: "Frokost og avslutning for året", sted: "Oppmøte 8.30 i klasserommet",
+      slutt: "Ferdig kl. 10.40 – siste skoledag før ferien", start: "08:30", end: "10:40"}]}
+- {uke: 26, dow: 4, spesial: true, ferie: true, timer: [], lekser: [], husk: [], 
+    hendelser: [{tittel: "FERIE 🎉", sted: "Sommerferie starter", start: null}]}
+- {uke: 26, dow: 5, spesial: true, ferie: true, timer: [], lekser: [], husk: [], 
+    hendelser: []}
