@@ -118,6 +118,7 @@ def build_ics(plan, kalender):
         return out
 
     def all_day(d, summ, triggers, desc=""):
+        summ = f"{plan['elev']}: {summ}"
         end = d + dt.timedelta(days=1)
         s = (f"DTSTART;VALUE=DATE:{d:%Y%m%d}\r\nDTEND;VALUE=DATE:{end:%Y%m%d}\r\n"
              f"TRANSP:TRANSPARENT\r\nSUMMARY:{esc(summ)}\r\n")
@@ -127,6 +128,7 @@ def build_ics(plan, kalender):
         vevent(s)
 
     def timed(d, sh, sm, eh, em, summ, loc="", desc="", triggers=()):
+        summ = f"{plan['elev']}: {summ}"
         s = (f"DTSTART;TZID=Europe/Oslo:{d:%Y%m%d}T{sh:02d}{sm:02d}00\r\n"
              f"DTEND;TZID=Europe/Oslo:{d:%Y%m%d}T{eh:02d}{em:02d}00\r\n"
              f"TRANSP:TRANSPARENT\r\nSUMMARY:{esc(summ)}\r\n")

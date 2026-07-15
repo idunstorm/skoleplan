@@ -25,150 +25,150 @@ RRULE:FREQ=YEARLY;BYMONTH=10;BYDAY=-1SU
 END:STANDARD
 END:VTIMEZONE
 BEGIN:VEVENT
-UID:sp-0-20260714T101401Z@samson
-DTSTAMP:20260714T101401Z
+UID:sp-0-20260715T083130Z@samson
+DTSTAMP:20260715T083130Z
 DTSTART;VALUE=DATE:20260616
 DTEND;VALUE=DATE:20260617
 TRANSP:TRANSPARENT
-SUMMARY:Husk: Husk gymtøy (kroppsøving – skolerunden)
+SUMMARY:Samson: Husk: Husk gymtøy (kroppsøving – skolerunden)
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Husk: Husk gymtøy (kroppsøving – skolerunden)
+DESCRIPTION:Samson: Husk: Husk gymtøy (kroppsøving – skolerunden)
 TRIGGER:-PT6H
 END:VALARM
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Husk: Husk gymtøy (kroppsøving – skolerunden)
+DESCRIPTION:Samson: Husk: Husk gymtøy (kroppsøving – skolerunden)
 TRIGGER:PT8H
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-UID:sp-1-20260714T101401Z@samson
-DTSTAMP:20260714T101401Z
+UID:sp-1-20260715T083130Z@samson
+DTSTAMP:20260715T083130Z
 DTSTART;VALUE=DATE:20260616
 DTEND;VALUE=DATE:20260617
 TRANSP:TRANSPARENT
-SUMMARY:Husk: Ta med ALT skoleutstyr som er lånt av skolen – skal leveres i dag
+SUMMARY:Samson: Husk: Ta med ALT skoleutstyr som er lånt av skolen – skal leveres i dag
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Husk: Ta med ALT skoleutstyr som er lånt av skolen – skal leveres i dag
+DESCRIPTION:Samson: Husk: Ta med ALT skoleutstyr som er lånt av skolen – skal leveres i dag
 TRIGGER:-PT6H
 END:VALARM
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Husk: Ta med ALT skoleutstyr som er lånt av skolen – skal leveres i dag
+DESCRIPTION:Samson: Husk: Ta med ALT skoleutstyr som er lånt av skolen – skal leveres i dag
 TRIGGER:PT8H
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-UID:sp-2-20260714T101401Z@samson
-DTSTAMP:20260714T101401Z
+UID:sp-2-20260715T083130Z@samson
+DTSTAMP:20260715T083130Z
 DTSTART;VALUE=DATE:20260616
 DTEND;VALUE=DATE:20260617
 TRANSP:TRANSPARENT
-SUMMARY:Lekse: Matematikk – Matematikkgruppe med Sondre og Ranveig
+SUMMARY:Samson: Lekse: Matematikk – Matematikkgruppe med Sondre og Ranveig
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Lekse: Matematikk – Matematikkgruppe med Sondre og Ranveig
+DESCRIPTION:Samson: Lekse: Matematikk – Matematikkgruppe med Sondre og Ranveig
 TRIGGER:-PT6H
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-UID:sp-3-20260714T101401Z@samson
-DTSTAMP:20260714T101401Z
+UID:sp-3-20260715T083130Z@samson
+DTSTAMP:20260715T083130Z
 DTSTART;VALUE=DATE:20260617
 DTEND;VALUE=DATE:20260618
 TRANSP:TRANSPARENT
-SUMMARY:Husk: Klær etter været (Bergen) + evt. matpakke/drikke
+SUMMARY:Samson: Husk: Klær etter været (Bergen) + evt. matpakke/drikke
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Husk: Klær etter været (Bergen) + evt. matpakke/drikke
+DESCRIPTION:Samson: Husk: Klær etter været (Bergen) + evt. matpakke/drikke
 TRIGGER:-PT6H
 END:VALARM
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Husk: Klær etter været (Bergen) + evt. matpakke/drikke
+DESCRIPTION:Samson: Husk: Klær etter været (Bergen) + evt. matpakke/drikke
 TRIGGER:PT8H
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-UID:sp-4-20260714T101401Z@samson
-DTSTAMP:20260714T101401Z
+UID:sp-4-20260715T083130Z@samson
+DTSTAMP:20260715T083130Z
 DTSTART;VALUE=DATE:20260618
 DTEND;VALUE=DATE:20260619
 TRANSP:TRANSPARENT
-SUMMARY:Husk: Gode tursko\, klær etter vær\, matpakke og drikke – evt. regntøy
+SUMMARY:Samson: Husk: Gode tursko\, klær etter vær\, matpakke og drikke – evt. regntøy
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Husk: Gode tursko\, klær etter vær\, matpakke og drikke – evt. regntøy
+DESCRIPTION:Samson: Husk: Gode tursko\, klær etter vær\, matpakke og drikke – evt. regntøy
 TRIGGER:-PT6H
 END:VALARM
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Husk: Gode tursko\, klær etter vær\, matpakke og drikke – evt. regntøy
+DESCRIPTION:Samson: Husk: Gode tursko\, klær etter vær\, matpakke og drikke – evt. regntøy
 TRIGGER:PT8H
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-UID:sp-5-20260714T101401Z@samson
-DTSTAMP:20260714T101401Z
+UID:sp-5-20260715T083130Z@samson
+DTSTAMP:20260715T083130Z
 DTSTART;VALUE=DATE:20260619
 DTEND;VALUE=DATE:20260620
 TRANSP:TRANSPARENT
-SUMMARY:Husk: Klær etter været + evt. matpakke/drikke
+SUMMARY:Samson: Husk: Klær etter været + evt. matpakke/drikke
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Husk: Klær etter været + evt. matpakke/drikke
+DESCRIPTION:Samson: Husk: Klær etter været + evt. matpakke/drikke
 TRIGGER:-PT6H
 END:VALARM
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Husk: Klær etter været + evt. matpakke/drikke
+DESCRIPTION:Samson: Husk: Klær etter været + evt. matpakke/drikke
 TRIGGER:PT8H
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-UID:sp-6-20260714T101401Z@samson
-DTSTAMP:20260714T101401Z
+UID:sp-6-20260715T083130Z@samson
+DTSTAMP:20260715T083130Z
 DTSTART;VALUE=DATE:20260622
 DTEND;VALUE=DATE:20260623
 TRANSP:TRANSPARENT
-SUMMARY:Husk: Fjæreklær + sko som tåler vann\, klær etter vær\, matpakke/drikke
+SUMMARY:Samson: Husk: Fjæreklær + sko som tåler vann\, klær etter vær\, matpakke/drikke
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Husk: Fjæreklær + sko som tåler vann\, klær etter vær\, matpakke/drikke
+DESCRIPTION:Samson: Husk: Fjæreklær + sko som tåler vann\, klær etter vær\, matpakke/drikke
 TRIGGER:-PT6H
 END:VALARM
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Husk: Fjæreklær + sko som tåler vann\, klær etter vær\, matpakke/drikke
+DESCRIPTION:Samson: Husk: Fjæreklær + sko som tåler vann\, klær etter vær\, matpakke/drikke
 TRIGGER:PT8H
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-UID:sp-7-20260714T101401Z@samson
-DTSTAMP:20260714T101401Z
+UID:sp-7-20260715T083130Z@samson
+DTSTAMP:20260715T083130Z
 DTSTART;VALUE=DATE:20260623
 DTEND;VALUE=DATE:20260624
 TRANSP:TRANSPARENT
-SUMMARY:Lekse: Matematikk – Til tirsdag
+SUMMARY:Samson: Lekse: Matematikk – Til tirsdag
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Lekse: Matematikk – Til tirsdag
+DESCRIPTION:Samson: Lekse: Matematikk – Til tirsdag
 TRIGGER:-PT6H
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-UID:sp-8-20260714T101401Z@samson
-DTSTAMP:20260714T101401Z
+UID:sp-8-20260715T083130Z@samson
+DTSTAMP:20260715T083130Z
 DTSTART;VALUE=DATE:20260903
 DTEND;VALUE=DATE:20260904
 TRANSP:TRANSPARENT
-SUMMARY:Foreldremøte 10A
+SUMMARY:Samson: Foreldremøte 10A
 DESCRIPTION:Kl. 18:00 på skolen (eksempel – slett meg)
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Foreldremøte 10A
+DESCRIPTION:Samson: Foreldremøte 10A
 TRIGGER:-PT6H
 END:VALARM
 END:VEVENT
