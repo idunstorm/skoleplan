@@ -9,7 +9,7 @@ elev: "Samson"
 valgfag: "Fransk"
 aar: 2026
 uker: [25, 26]
-oppdatert: "2026-07-14"
+oppdatert: "2026-07-15"
 
 doc9c: "https://docs.google.com/document/d/e/2PACX-1vT1Uweya7sdSKaoIRlhltQkJkE0RyiPI3VAIwPSS_v7TEo-cRcaPTwzkmOwuUeu_0Td6km2KH-_iwM2/pub"
 kilde9c: "https://www.bergen.kommune.no/omkommunen/avdelinger/ytrebygda-skole/arbeidsplaner"
@@ -18,8 +18,8 @@ arshjul: "https://docs.google.com/spreadsheets/d/1ktXyyf_pH3D-Z_2NwcQ9eyByFhLK_z
 # Klasse/kilde byttes automatisk etter dato. 9C nå -> 10A fra skolestart i august.
 # Endre "fra"-datoen hvis skolestart er en annen dag.
 kilder:
-  - {klasse: "9C",  fra: "2026-06-01", doc: "https://docs.google.com/document/d/e/2PACX-1vT1Uweya7sdSKaoIRlhltQkJkE0RyiPI3VAIwPSS_v7TEo-cRcaPTwzkmOwuUeu_0Td6km2KH-_iwM2/pub"}
-  - {klasse: "10A", fra: "2026-08-11", doc: "https://docs.google.com/document/d/e/2PACX-1vTYhpFV8CFjnH80_qUE__glc_tB6niOE6I7pD2In1nOez5zk5doG3Dlumcz1qmiCALtxRJIND7BUL1B/pub"}
+- {klasse: "9C", fra: "2026-06-01", doc: "https://docs.google.com/document/d/e/2PACX-1vT1Uweya7sdSKaoIRlhltQkJkE0RyiPI3VAIwPSS_v7TEo-cRcaPTwzkmOwuUeu_0Td6km2KH-_iwM2/pub"}
+- {klasse: "10A", fra: "2026-08-11", doc: "https://docs.google.com/document/d/e/2PACX-1vTYhpFV8CFjnH80_qUE__glc_tB6niOE6I7pD2In1nOez5zk5doG3Dlumcz1qmiCALtxRJIND7BUL1B/pub"}
 
 neste:
   klasse: "10A"
