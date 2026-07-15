@@ -43,13 +43,24 @@ jobs:
       - name: Installer avhengigheter
         run: pip install -r requirements.txt
 
-      # Daglig/på forespørsel: sjekk om planen er endret
+      # Claude Code brukes til å tolke planen (kjører på abonnementet via OAuth)
+      - name: Sett opp Node
+        if: github.event_name != 'push'
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Installer Claude Code
+        if: github.event_name != 'push'
+        run: npm install -g @anthropic-ai/claude-code
+
+      # Daglig/på forespørsel: sjekk om planen er endret, tolk automatisk
       - name: Sjekk for ny ukeplan
         id: check
         if: github.event_name != 'push'
         env:
           AUTO_APPLY: "1"            # tolk hele planen automatisk via Claude
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           FORCE: ${{ github.event.inputs.force == 'true' && '1' || '0' }}
         run: python check.py
 

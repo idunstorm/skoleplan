@@ -13,7 +13,7 @@ Alt bygges av **GitHub Actions** (gratis). Hver natt sjekkes 9C-planen for endri
 
 1. **Lag et GitHub-repo** (f.eks. `skoleplan`) og last opp alle filene i denne mappen (behold mappestrukturen, inkludert `.github/`).
 2. **Slå på Pages:** Repoet → **Settings → Pages → Build and deployment → Source: GitHub Actions.**
-3. **Legg inn API-nøkkelen** (for automatisk plan-tolkning): lag en nøkkel på **console.anthropic.com** (sett gjerne et utgiftstak) → repoet → **Settings → Secrets and variables → Actions → New repository secret** → navn `ANTHROPIC_API_KEY`, lim inn nøkkelen.
+3. **Legg inn Claude-token** (for automatisk plan-tolkning, går på Claude-abonnementet ditt – krever **Pro eller Max**): kjør `claude setup-token` i terminalen (åpner nettleser, gir deg en token som varer ca. 1 år) → repoet → **Settings → Secrets and variables → Actions → New repository secret** → navn `CLAUDE_CODE_OAUTH_TOKEN`, lim inn tokenen. Fornyes én gang i året.
 4. Gå til **Actions**-fanen, velg *«Bygg og publiser skoleplan»* → **Run workflow** (eller bare vent til nattkjøringen).
 5. Når jobben er grønn, ligger sidene her:
    - **Infoside:** `https://<brukernavn>.github.io/<repo>/`
@@ -56,7 +56,7 @@ Eller: send meg (Claude) teksten fra Vigilo, så gir jeg deg en ferdig linje.
 
 **Sikkerhetsnett:** hver tolkning valideres (ukenumre stemmer med overskriften, hver skoledag har timeplan eller en hendelse osv.). Består den ikke valideringen, **beholdes forrige plan** – appen viser aldri åpenbart feil info – og du får en GitHub-sak om at automatikken bør sjekkes. Da kan du sende lenken til Claude eller rette filene selv.
 
-> **Krever en Anthropic API-nøkkel** (egen «pay-as-you-go»-konto, *ikke* et Claude-abonnement). Nøkkelen leses bare når planen faktisk endrer seg – typisk noen få kroner i måneden. Se oppsett-steget over. Vil du bytte modell: sett miljøvariabelen `SKOLEPLAN_MODEL` (standard `claude-opus-4-8`).
+> **Går på Claude-abonnementet ditt** (Pro/Max) via en OAuth-token (`CLAUDE_CODE_OAUTH_TOKEN`) – **ingen ekstra betaling**. Tolkning kjøres bare når planen faktisk endrer seg, så det bruker forsvinnende lite av abonnementet. Se oppsett-steget over. Tokenen varer ca. 1 år og må fornyes med `claude setup-token`. Vil du bytte modell: sett `SKOLEPLAN_MODEL` (standard `sonnet`; Max-brukere kan bruke `opus`).
 
 ---
 

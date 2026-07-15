@@ -11,8 +11,9 @@ Sikkerhet: hvis tolkningen ikke består valideringen, kastes en feil og
 kaller-koden beholder forrige (gyldige) plan. Vi viser aldri åpenbart feil
 info på barnets plan.
 
-Kjøres av GitHub Actions. Krever ANTHROPIC_API_KEY (egen API-konto, ikke
-et Claude-abonnement) og nett.
+Kjøres av GitHub Actions. Bruker Claude Code (`claude`) autentisert med
+CLAUDE_CODE_OAUTH_TOKEN – går på Claude-abonnementet (Pro/Max), ikke et
+betalt API. Krever nett.
 
 Lokal test uten API:
   python llm_plan.py --self-test        # validerer at dagens plan.yaml er "gyldig"
@@ -32,7 +33,9 @@ DATA = ROOT / "data"
 PLAN = DATA / "plan.yaml"
 TOPICS = DATA / "topics.yaml"
 
-MODEL = os.environ.get("SKOLEPLAN_MODEL", "claude-opus-4-8")
+# Kjøres gjennom Claude Code (abonnement-OAuth), ikke et betalt API.
+# "sonnet" virker på både Pro og Max; Max-brukere kan sette SKOLEPLAN_MODEL=opus.
+MODEL = os.environ.get("SKOLEPLAN_MODEL", "sonnet")
 
 # ---------------------------------------------------------------------------
 # JSON-skjema for det Claude skal returnere (structured outputs, strict).
@@ -201,26 +204,68 @@ def header_weeks(text):
 
 
 # ---------------------------------------------------------------------------
-# LLM-kall
+# LLM-kall via Claude Code (abonnement-OAuth: CLAUDE_CODE_OAUTH_TOKEN)
 # ---------------------------------------------------------------------------
+SCHEMA_HINT = """\
+Svar KUN med gyldig JSON – ingen tekst før eller etter, ingen ```-kodeblokker.
+Nøyaktig denne formen (dow: 1=mandag ... 5=fredag; ta med alle 10 skoledager):
+{
+  "uker": [25, 26],
+  "temaer": [{"fag": "...", "tema": "...", "blurb": "én setning",
+              "laerer": ["hva de skal lære ..."], "sporsmal": ["diskusjonsspørsmål ..."]}],
+  "vurderinger": [{"fag": "...", "tittel": "...", "dato": "YYYY-MM-DD eller null",
+                   "note": "... eller null"}],
+  "ukelekse": [{"uke": 25, "tekst": "..."}],
+  "dager": [{"uke": 25, "dow": 1, "spesial": false, "ferie": false,
+             "timer": [{"t": "08:30–09:30", "f": "Fag", "nb": "merknad eller null"}],
+             "lekser": [{"fag": "Fag eller null", "tekst": "..."}],
+             "husk": [{"tekst": "..."}],
+             "hendelser": [{"tittel": "...", "sted": "... eller null",
+                            "slutt": "... eller null", "start": "HH:MM eller null",
+                            "end": "HH:MM eller null"}]}]
+}"""
+
+
+def _extract_json(text):
+    text = (text or "").strip()
+    m = re.search(r"```(?:json)?\s*(.*?)```", text, re.S)
+    if m:
+        text = m.group(1).strip()
+    a, b = text.find("{"), text.rfind("}")
+    if a != -1 and b != -1:
+        text = text[a:b + 1]
+    return json.loads(text)
+
+
+def run_claude_code(prompt):
+    """Kjør Claude Code i print-modus (én tur) og returner sluttsvaret som tekst."""
+    import shutil
+    import subprocess
+    exe = shutil.which("claude")
+    if not exe:
+        raise RuntimeError("Claude Code (`claude`) ikke funnet – installer @anthropic-ai/claude-code.")
+    cmd = [exe, "-p", "--output-format", "json", "--max-turns", "1", "--model", MODEL]
+    r = subprocess.run(cmd, input=prompt, capture_output=True, text=True, timeout=420)
+    if r.returncode != 0:
+        raise RuntimeError(f"Claude Code feilet ({r.returncode}): {(r.stderr or r.stdout)[:600]}")
+    try:
+        wrapper = json.loads(r.stdout)
+    except json.JSONDecodeError:
+        return r.stdout   # eldre format: rå tekst
+    if isinstance(wrapper, dict):
+        if wrapper.get("is_error"):
+            raise RuntimeError(f"Claude Code-feil: {str(wrapper.get('result'))[:600]}")
+        return wrapper.get("result", "")
+    return r.stdout
+
+
 def call_claude(text, ctx):
-    import anthropic
-    client = anthropic.Anthropic()  # leser ANTHROPIC_API_KEY fra miljøet
-    system = SYSTEM.format(**ctx)
-    resp = client.messages.create(
-        model=MODEL,
-        max_tokens=16000,
-        thinking={"type": "adaptive"},
-        output_config={"effort": "high", "format": {"type": "json_schema", "schema": SCHEMA}},
-        system=system,
-        messages=[{"role": "user", "content": "RÅ TEKST FRA UKEPLANEN:\n\n" + text[:60000]}],
-    )
-    if resp.stop_reason == "refusal":
-        raise RuntimeError(f"Claude avslo forespørselen: {resp.stop_details}")
-    out = next((b.text for b in resp.content if b.type == "text"), None)
-    if not out:
-        raise RuntimeError("Tomt svar fra Claude.")
-    return json.loads(out)
+    prompt = (SYSTEM.format(**ctx) + "\n\n" + SCHEMA_HINT
+              + "\n\nRÅ TEKST FRA UKEPLANEN:\n\n" + text[:60000])
+    result = run_claude_code(prompt)
+    if not result:
+        raise RuntimeError("Tomt svar fra Claude Code.")
+    return _extract_json(result)
 
 
 # ---------------------------------------------------------------------------
