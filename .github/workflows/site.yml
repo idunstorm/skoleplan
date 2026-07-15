@@ -81,7 +81,9 @@ jobs:
         run: |
           git config user.name  "skoleplan-bot"
           git config user.email "actions@github.com"
-          git add data/plan.yaml data/topics.yaml .state.json _incoming/ 2>/dev/null || true
+          git add data/plan.yaml data/topics.yaml 2>/dev/null || true
+          [ -f .state.json ] && git add .state.json 2>/dev/null || true
+          [ -d _incoming ] && git add _incoming 2>/dev/null || true
           if ! git diff --cached --quiet; then
             git commit -m "Auto: oppdatert plan/tilstand ($(date +%F))"
             git push
