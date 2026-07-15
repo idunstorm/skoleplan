@@ -10,7 +10,12 @@ on:
       - ".github/workflows/site.yml"
   schedule:
     - cron: "17 5 * * *"      # daglig ~07:17 norsk tid (sommer)
-  workflow_dispatch: {}
+  workflow_dispatch:
+    inputs:
+      force:
+        description: "Tving ny tolkning av planen (test), selv om den er uendret"
+        type: boolean
+        default: false
 
 permissions:
   contents: write     # committe oppdatert plan.yaml / state
@@ -45,6 +50,7 @@ jobs:
         env:
           AUTO_APPLY: "1"            # tolk hele planen automatisk via Claude
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          FORCE: ${{ github.event.inputs.force == 'true' && '1' || '0' }}
         run: python check.py
 
       - name: Bygg side og kalender

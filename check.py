@@ -132,7 +132,8 @@ def main():
 
     state = load_state()
     cur_weeks = plan.get("uker", [])
-    changed = (digest != state.get("hash")) or (weeks and weeks != cur_weeks)
+    force = os.environ.get("FORCE") == "1"      # tving ny tolkning (test)
+    changed = force or (digest != state.get("hash")) or (weeks and weeks != cur_weeks)
     new_plan = bool(weeks) and weeks != cur_weeks
 
     print(f"Oppdaget uker={weeks} (nåværende i plan.yaml={cur_weeks}); "
