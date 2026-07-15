@@ -27,6 +27,7 @@ from pathlib import Path
 
 import yaml
 from ruamel.yaml import YAML
+from ruamel.yaml.scalarstring import SingleQuotedScalarString as _Q
 
 ROOT = Path(__file__).resolve().parent
 DATA = ROOT / "data"
@@ -244,7 +245,10 @@ def run_claude_code(prompt):
     exe = shutil.which("claude")
     if not exe:
         raise RuntimeError("Claude Code (`claude`) ikke funnet – installer @anthropic-ai/claude-code.")
-    cmd = [exe, "-p", "--output-format", "json", "--max-turns", "1", "--model", MODEL]
+    # --tools "" slår av alle verktøy -> modellen kan ikke gjøre "tool_use",
+    # og må svare direkte med JSON (unngår error_max_turns).
+    cmd = [exe, "-p", "--output-format", "json", "--tools", "",
+           "--max-turns", "1", "--model", MODEL]
     r = subprocess.run(cmd, input=prompt, capture_output=True, text=True, timeout=420)
     if r.returncode != 0:
         raise RuntimeError(f"Claude Code feilet ({r.returncode}): {(r.stderr or r.stdout)[:600]}")
@@ -330,7 +334,8 @@ def write_plan(data):
     doc["ukelekse"] = {int(u["uke"]): u["tekst"] for u in data.get("ukelekse", [])}
     doc["temaer"] = [{"fag": t["fag"], "tema": t["tema"]} for t in data.get("temaer", [])]
     doc["vurderinger"] = [
-        {"fag": v["fag"], "tittel": v["tittel"], "dato": v.get("dato"), "note": v.get("note")}
+        {"fag": v["fag"], "tittel": v["tittel"],
+         "dato": (_Q(v["dato"]) if v.get("dato") else None), "note": v.get("note")}
         for v in data.get("vurderinger", [])
     ]
 
@@ -342,7 +347,8 @@ def write_plan(data):
         if d.get("ferie"):
             row["ferie"] = True
         row["timer"] = [
-            ({"t": t["t"], "f": t["f"], "nb": t["nb"]} if t.get("nb") else {"t": t["t"], "f": t["f"]})
+            ({"t": _Q(t["t"]), "f": t["f"], "nb": t["nb"]} if t.get("nb")
+             else {"t": _Q(t["t"]), "f": t["f"]})
             for t in d.get("timer", [])
         ]
         row["lekser"] = [
@@ -355,7 +361,8 @@ def write_plan(data):
             ev = {"tittel": h["tittel"]}
             for k in ("sted", "slutt", "start", "end"):
                 if h.get(k) is not None:
-                    ev[k] = h[k]
+                    # klokkeslett må siteres så YAML ikke tolker "10:00" som tall
+                    ev[k] = _Q(h[k]) if k in ("start", "end") else h[k]
             row["hendelser"].append(ev)
         dager.append(row)
     doc["dager"] = dager
@@ -391,8 +398,11 @@ def merge_topics(data):
 # ---------------------------------------------------------------------------
 # Hovedinngang – kalles fra check.py
 # ---------------------------------------------------------------------------
-def apply_from_doc(text=None):
-    """Tolk planen og skriv plan.yaml + topics.yaml. Kaster ved valideringsfeil."""
+def apply_from_doc(text=None, attempts=3):
+    """Tolk planen og skriv plan.yaml + topics.yaml. Kaster hvis alle forsøk feiler.
+
+    Claude Code er ikke deterministisk, så vi prøver på nytt til svaret er
+    gyldig JSON som består valideringen (bygger aldri på et dårlig svar)."""
     plan = yaml.safe_load(PLAN.read_text(encoding="utf-8"))
     src = active_source(plan) or {}
     ctx = {
@@ -405,8 +415,21 @@ def apply_from_doc(text=None):
         url = src.get("doc") or plan["doc9c"]
         text = fetch_text(url)
 
-    data = call_claude(text, ctx)
-    validate(data, want_weeks=header_weeks(text) or None)
+    want = header_weeks(text) or None
+    data = None
+    last_err = None
+    for i in range(attempts):
+        try:
+            data = call_claude(text, ctx)
+            validate(data, want_weeks=want)
+            break
+        except Exception as e:                    # JSON-, CLI- eller valideringsfeil
+            last_err = e
+            data = None
+            print(f"Tolkningsforsøk {i + 1}/{attempts} feilet: {e}")
+    if data is None:
+        raise RuntimeError(f"Alle {attempts} tolkningsforsøk feilet. Siste: {last_err}")
+
     write_plan(data)
     added = merge_topics(data)
     return {"uker": data["uker"], "dager": len(data["dager"]),
