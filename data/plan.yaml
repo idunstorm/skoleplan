@@ -27,7 +27,7 @@ neste:
   doc: "https://docs.google.com/document/d/e/2PACX-1vTYhpFV8CFjnH80_qUE__glc_tB6niOE6I7pD2In1nOez5zk5doG3Dlumcz1qmiCALtxRJIND7BUL1B/pub"
 
 ukelekse:
-  25: Bruk mellom 15-30 minutter hjemme til å se gjennom læringsmålene vi har jobbet med på skolen, sammen med en voksen. Se også over årshjulet for å holde deg oppdatert.
+  25: Bruk mellom 15-30 minutter hjemme til å se gjennom læringsmålene vi har jobbet med på skolen, sammen med en voksen. De står øverst på læringsplanen. Se også over årshjulet for å holde deg oppdatert.
   26: ''
 temaer:
 - fag: Matematikk
@@ -46,22 +46,22 @@ temaer:
   tema: Musikk og samfunn
 vurderinger:
 - fag: Engelsk
-  tittel: Writing/podcast
+  tittel: Writing/podcast – Out of This World (Fantasy and Science Fiction)
   dato:
   note: Dato ikke oppgitt i planen – sjekk Vigilo/Google Classroom.
 dager:
 - uke: 25
   dow: 1
   timer:
-  - t: 08:30–09:30
+  - t: '08:30–09:30'
     f: KRLE
-  - t: 09:40–10:40
+  - t: '09:40–10:40'
     f: KRLE
-  - t: 11:30–12:30
+  - t: '11:30–12:30'
     f: Fransk
-  - t: 12:40–13:40
+  - t: '12:40–13:40'
     f: Norsk
-  - t: 13:50–14:50
+  - t: '13:50–14:50'
     f: Naturfag
   lekser: []
   husk: []
@@ -69,20 +69,21 @@ dager:
 - uke: 25
   dow: 2
   timer:
-  - t: 08:30–09:30
+  - t: '08:30–09:30'
     f: Engelsk
-  - t: 09:40–10:40
+  - t: '09:40–10:40'
     f: Matematikk
-    nb: Rydde klasserommet/levere CB
-  - t: 11:30–12:30
+    nb: Matematikkgruppe med Sondre og Ranveig
+  - t: '11:30–12:30'
     f: Kroppsøving
     nb: Skolerunden
-  - t: 12:40–13:40
+  - t: '12:40–13:40'
     f: Norsk
   lekser: []
   husk:
-  - tekst: Ta med alt utstyr som er lånt fra skolen (skal leveres tilbake i dag)
+  - tekst: Ta med alt utstyr som er lånt fra skolen (leveres i dag)
   - tekst: Husk gymtøy (kroppsøving – Skolerunden)
+  - tekst: Rydd klasserommet / lever Chromebook (CB)
   hendelser: []
 - uke: 25
   dow: 3
@@ -90,7 +91,8 @@ dager:
   timer: []
   lekser: []
   husk:
-  - tekst: Klær etter vær og matpakke (byvandring)
+  - tekst: Kle deg etter været (byvandring hele dagen)
+  - tekst: Ta med matpakke
   hendelser:
   - tittel: Byvandring
     sted: Den blå steinen
@@ -103,10 +105,13 @@ dager:
   timer: []
   lekser: []
   husk:
-  - tekst: Klær etter vær og matpakke (Trefjellstur)
+  - tekst: Kle deg etter været (tur i fjellet)
+  - tekst: Ta med matpakke
+  - tekst: Bruk gode turfotøy/sko
   hendelser:
   - tittel: Trefjellstur
-    sted: 'Fløibanestasjonen (rute: Fløien–Rundemannen–Blåmannen, tilpasses været)'
+    sted: Fløibanestasjonen
+    slutt: Vi går Fløien-Rundemannen-Blåmannen (vi tilpasser gjerne litt etter været)
     start: '10:00'
     end: '14:00'
 - uke: 25
@@ -115,11 +120,12 @@ dager:
   timer: []
   lekser: []
   husk:
-  - tekst: Klær etter vær og matpakke (Bergenhus festningsmuseum)
+  - tekst: Kle deg etter været (tur i byen)
+  - tekst: Ta med matpakke
   hendelser:
   - tittel: Bergenhus festningsmuseum
     sted: Den blå steinen
-    slutt: Vi er ferdig i byen ca klokken 13
+    slutt: Vi er ferdig i byen ca klokken 13.
     start: '10:30'
     end: '13:00'
 - uke: 26
@@ -128,10 +134,12 @@ dager:
   timer: []
   lekser: []
   husk:
-  - tekst: Klær etter vær og matpakke (Livet i fjæren)
+  - tekst: Kle deg etter været (tur til fjæra)
+  - tekst: Ta med matpakke
+  - tekst: Klær/sko som tåler å bli våte
   hendelser:
   - tittel: Livet i fjæren
-    sted: Parkeringsplassen ved Arboretet (turen går til Sandholna)
+    sted: Parkeringsplassen ved Arboretet
     slutt: Vi avslutter ca. kl.13 på parkeringsplassen
     start: '10:00'
     end: '13:00'
