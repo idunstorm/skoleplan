@@ -138,45 +138,61 @@ def main():
     print(f"Oppdaget uker={weeks} (nåværende i plan.yaml={cur_weeks}); "
           f"{len(topics)} fag/tema; endret={changed}; ny plan={new_plan}")
 
+    save_hash = True
     if changed:
-        INCOMING.mkdir(exist_ok=True)
-        lines = [f"# {'Ny ukeplan oppdaget' if new_plan else 'Endring i ukeplanen'} "
-                 f"({'uke ' + '–'.join(map(str, weeks)) if weeks else 'ukjent uke'})",
-                 "",
-                 f"- Oppdaget: {dt.datetime.now().isoformat(timespec='minutes')}",
-                 f"- Uker i planen nå: {weeks}  (plan.yaml hadde {cur_weeks})",
-                 f"- Kilde: {url}",
-                 "",
-                 "## Fag og temaer (automatisk lest)",
-                 ""]
-        for t in topics:
-            lines.append(f"- **{t['fag']}**: {t['tema']}")
-        lines += ["", "## Hva du gjør nå",
-                  "1. Timeplan/lekser struktureres tryggest for hånd – send lenken til Claude, "
-                  "så får du en oppdatert `data/plan.yaml` tilbake, **eller** rediger fila selv.",
-                  "2. Ukenummer er allerede oppdatert automatisk. De leste fag/temaene over kan du "
-                  "lime rett inn, eller la Claude fylle dem inn med kuraterte oppsummeringer.",
-                  "", "## Rå tekst fra planen", "", "```", text.strip()[:6000], "```"]
-        (INCOMING / "ny-plan.md").write_text("\n".join(lines), encoding="utf-8")
-
         applied = False
-        if os.environ.get("AUTO_APPLY", "1") == "1" and (weeks or topics):
+        parse_failed = False
+        err_msg = ""
+        # Full, automatisk tolkning av hele planen via Claude (llm_plan.py).
+        if os.environ.get("AUTO_APPLY", "1") == "1":
             try:
-                apply_to_plan(weeks, topics)
+                import llm_plan
+                info = llm_plan.apply_from_doc(text)
                 applied = True
-                print("AUTO_APPLY: oppdaterte ukenummer i plan.yaml")
+                print(f"LLM: tolket full plan automatisk: {info}")
+            except ValueError as e:
+                # Validering feilet -> tolkningen så feil ut. Behold forrige plan.
+                parse_failed = True
+                err_msg = f"Validering feilet: {e}"
+                print(f"{err_msg}\nBeholder forrige (gyldige) plan.")
             except Exception as e:
-                print(f"AUTO_APPLY feilet ({e}) – fortsetter med varsel.")
+                # API/nett-feil (trolig forbigående). Behold plan og prøv igjen senere.
+                parse_failed = True
+                save_hash = False   # ikke lagre hash -> ny sjekk prøver på nytt
+                err_msg = f"Tolkning feilet (forbigående?): {e}"
+                print(f"{err_msg}\nBeholder forrige plan, prøver igjen ved neste kjøring.")
+
+        # Varsel-fil (kun nyttig når automatikken IKKE lyktes)
+        if parse_failed:
+            INCOMING.mkdir(exist_ok=True)
+            lines = [f"# Klarte ikke tolke ny ukeplan automatisk "
+                     f"({'uke ' + '–'.join(map(str, weeks)) if weeks else 'ukjent uke'})",
+                     "",
+                     f"- Oppdaget: {dt.datetime.now().isoformat(timespec='minutes')}",
+                     f"- Uker i planen nå: {weeks}  (plan.yaml hadde {cur_weeks})",
+                     f"- Kilde: {url}",
+                     f"- Feil: {err_msg}",
+                     "",
+                     "Forrige plan er beholdt, så appen viser fortsatt gyldig info.",
+                     "For å fikse: send lenken over til Claude, så får du en oppdatert "
+                     "`data/plan.yaml` tilbake – eller kjør workflowen på nytt.",
+                     "", "## Fag og temaer (grovlest)", ""]
+            for t in topics:
+                lines.append(f"- **{t['fag']}**: {t['tema']}")
+            lines += ["", "## Rå tekst fra planen", "", "```", text.strip()[:6000], "```"]
+            (INCOMING / "ny-plan.md").write_text("\n".join(lines), encoding="utf-8")
 
         set_output(changed="true", new_plan=str(new_plan).lower(),
-                   weeks="-".join(map(str, weeks)), applied=str(applied).lower())
+                   weeks="-".join(map(str, weeks)), applied=str(applied).lower(),
+                   parse_failed=str(parse_failed).lower())
     else:
         set_output(changed="false")
 
-    state["hash"] = digest
-    state["weeks"] = weeks
-    state["checked"] = dt.datetime.now().isoformat(timespec="minutes")
-    save_state(state)
+    if save_hash:
+        state["hash"] = digest
+        state["weeks"] = weeks
+        state["checked"] = dt.datetime.now().isoformat(timespec="minutes")
+        save_state(state)
 
 if __name__ == "__main__":
     main()

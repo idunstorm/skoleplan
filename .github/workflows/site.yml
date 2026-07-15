@@ -43,7 +43,8 @@ jobs:
         id: check
         if: github.event_name != 'push'
         env:
-          AUTO_APPLY: "1"            # oppdater ukenummer automatisk (trygt)
+          AUTO_APPLY: "1"            # tolk hele planen automatisk via Claude
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: python check.py
 
       - name: Bygg side og kalender
@@ -63,7 +64,7 @@ jobs:
         run: |
           git config user.name  "skoleplan-bot"
           git config user.email "actions@github.com"
-          git add data/plan.yaml .state.json _incoming/ 2>/dev/null || true
+          git add data/plan.yaml data/topics.yaml .state.json _incoming/ 2>/dev/null || true
           if ! git diff --cached --quiet; then
             git commit -m "Auto: oppdatert plan/tilstand ($(date +%F))"
             git push
@@ -71,12 +72,12 @@ jobs:
             echo "Ingen endringer å committe."
           fi
 
-      - name: Varsle om ny ukeplan
-        if: steps.check.outputs.new_plan == 'true'
+      - name: Varsle hvis automatisk tolkning feilet
+        if: steps.check.outputs.parse_failed == 'true'
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           gh issue create \
-            --title "Ny ukeplan oppdaget (uke ${{ steps.check.outputs.weeks }})" \
+            --title "Klarte ikke tolke ny ukeplan automatisk (uke ${{ steps.check.outputs.weeks }})" \
             --body-file _incoming/ny-plan.md \
             || echo "Klarte ikke opprette sak (fortsetter)."
