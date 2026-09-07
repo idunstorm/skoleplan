@@ -1,6 +1,6 @@
 # Klarte ikke tolke ny ukeplan automatisk (uke 25)
 
-- Oppdaget: 2026-09-07T06:02
+- Oppdaget: 2026-09-07T10:23
 - Uker i planen nå: [25]  (plan.yaml hadde [25, 26])
 - Kilde: https://docs.google.com/document/d/e/2PACX-1vTYhpFV8CFjnH80_qUE__glc_tB6niOE6I7pD2In1nOez5zk5doG3Dlumcz1qmiCALtxRJIND7BUL1B/pub
 - Feil: Tolkning feilet (forbigående?): Alle 3 tolkningsforsøk feilet. Siste: Validering feilet:
