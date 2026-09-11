@@ -1,12 +1,10 @@
 # Klarte ikke tolke ny ukeplan automatisk (uke 25)
 
-- Oppdaget: 2026-09-10T09:49
+- Oppdaget: 2026-09-11T09:46
 - Uker i planen nå: [25]  (plan.yaml hadde [25, 26])
 - Kilde: https://docs.google.com/document/d/e/2PACX-1vTYhpFV8CFjnH80_qUE__glc_tB6niOE6I7pD2In1nOez5zk5doG3Dlumcz1qmiCALtxRJIND7BUL1B/pub
 - Feil: Tolkning feilet (forbigående?): Alle 3 tolkningsforsøk feilet. Siste: Validering feilet:
   - uker [25, 26] matcher ikke overskriften [25]
-  - uke 26 dow 4: tom dag (verken timeplan eller hendelse)
-  - uke 26 dow 5: tom dag (verken timeplan eller hendelse)
   - ingen temaer tolket
 
 Forrige plan er beholdt, så appen viser fortsatt gyldig info.
