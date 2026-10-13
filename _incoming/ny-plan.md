@@ -1,9 +1,9 @@
 # Klarte ikke tolke ny ukeplan automatisk (uke 25)
 
-- Oppdaget: 2026-10-12T13:09
+- Oppdaget: 2026-10-13T12:42
 - Uker i planen nå: [25]  (plan.yaml hadde [25, 26])
 - Kilde: https://docs.google.com/document/d/e/2PACX-1vTYhpFV8CFjnH80_qUE__glc_tB6niOE6I7pD2In1nOez5zk5doG3Dlumcz1qmiCALtxRJIND7BUL1B/pub
-- Feil: Tolkning feilet (forbigående?): Alle 3 tolkningsforsøk feilet. Siste: Claude Code feilet (1): {"type":"result","subtype":"success","is_error":true,"api_error_status":401,"duration_ms":1798,"duration_api_ms":0,"num_turns":1,"result":"Failed to authenticate. API Error: 401 OAuth access token has been revoked.","stop_reason":"stop_sequence","session_id":"b442e140-f16d-443c-8c77-ca5faf75ff08","total_cost_usd":0,"usage":{"input_tokens":0,"cache_creation_input_tokens":0,"cache_read_input_tokens":0,"output_tokens":0,"server_tool_use":{"web_search_requests":0,"web_fetch_requests":0},"service_tier":"standard","cache_creation":{"ephemeral_1h_input_tokens":0,"ephemeral_5m_input_tokens":0},"infere
+- Feil: Tolkning feilet (forbigående?): Alle 3 tolkningsforsøk feilet. Siste: Claude Code feilet (1): {"type":"result","subtype":"success","is_error":true,"api_error_status":401,"duration_ms":1953,"duration_api_ms":0,"num_turns":1,"result":"Failed to authenticate. API Error: 401 OAuth access token has been revoked.","stop_reason":"stop_sequence","session_id":"192eea91-e5bb-4141-b9cb-944e9cec5753","total_cost_usd":0,"usage":{"input_tokens":0,"cache_creation_input_tokens":0,"cache_read_input_tokens":0,"output_tokens":0,"server_tool_use":{"web_search_requests":0,"web_fetch_requests":0},"service_tier":"standard","cache_creation":{"ephemeral_1h_input_tokens":0,"ephemeral_5m_input_tokens":0},"infere
 
 Forrige plan er beholdt, så appen viser fortsatt gyldig info.
 For å fikse: send lenken over til Claude, så får du en oppdatert `data/plan.yaml` tilbake – eller kjør workflowen på nytt.
